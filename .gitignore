@@ -1,0 +1,13 @@
+/WiiClient/gradle
+/WiiClient/local.properties
+/WiiClient/build
+/WiiClient/.gradle
+/WiiClient/.settings
+/WiiClient/android/bin
+
+/WiiServer/gradle
+/WiiServer/local.properties
+/WiiServer/build
+/WiiServer/.gradle
+/WiiServer/.settings
+/WiiServer/android/bin
