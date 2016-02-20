@@ -98,7 +98,7 @@ public class MainMenuScreen implements Screen {
       		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       		//Gdx.app.log("HOLAAA", "PPEEEPIIITOO");
       		//if (Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer) && n == 5 && started){
-      			if(started && n < 110.5){
+      			if(started && n > 0.1){
       				SocketSender.Snd_txt_Msg(String.valueOf(Gdx.input.getPitch()));
       				Gdx.app.log("Eix X: ", String.valueOf(Gdx.input.getPitch()));
       				n = 0;

@@ -62,7 +62,7 @@ public class Partida implements Screen{
 	    /*Upper Half*/          
 	    //set the openGl viewport to half the screenheight and starting y from the     middle of the screen
 	    Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
-	    		30*Gdx.graphics.getWidth(),30*Gdx.graphics.getHeight()/2);      
+	    		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
 	    background.draw(batch);
 	    batch.end();
 
@@ -72,7 +72,7 @@ public class Partida implements Screen{
 	    /*bottom Half*/     
 	    //set the openGl viewport to half the screenheight and starting y from the     bottom of the screen
 	    Gdx.gl.glViewport(0,0,
-	    		30*Gdx.graphics.getWidth(),30*Gdx.graphics.getHeight()/2);    
+	    		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 	    background.draw(batch);
 	    batch.end();
 
