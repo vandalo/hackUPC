@@ -51,7 +51,8 @@ public class Partida implements Screen{
     public World world;
     public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
     Box2DDebugRenderer debugRenderer;
-    Car carcito;
+    Car carcito, carcitoFerran;
+    private float lookX, lookY;
 	
 	public Partida(){
 		float w = Gdx.graphics.getWidth();
@@ -72,9 +73,17 @@ public class Partida implements Screen{
         //car.setPosition(20*32/2, 10);
         carcito = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
         		new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")), 
-        		new Sprite(new Texture("cochehiperrealista-01.png")));
-        carcito.setPosition(20*32/2, 10);
+        		new Sprite(new Texture("cochehiperrealista-01.png")), 0);
+        carcito.setPosition(15*32/2, 10);
+        carcito.scale(0.7f);
         carcito.initBody(world);
+        
+        carcitoFerran = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
+        		new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")), 
+        		new Sprite(new Texture("cochehiperrealista-01.png")), 1);
+        carcitoFerran.setPosition(25*32/2, 10);
+        carcitoFerran.scale(0.7f);
+        carcitoFerran.initBody(world);
         
         
         System.out.println(tiledMap.getProperties().get("width",Integer.class));
@@ -82,16 +91,18 @@ public class Partida implements Screen{
 		cam = new PerspectiveCamera(60, 15, 15 * (h / w));
 		cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
 		
+		lookX = 20*32/2f;
+		lookY = 0;
 		//cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(20*32/2f, 0f, -50f);
-        cam.lookAt(20*32/2,0,0);
+        cam.position.set(lookX, lookY, -50f);
+        cam.lookAt(lookX,lookY,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.rotate(-50, 1, 0, 0);
         cam.update();
         
-        cam2.position.set(20*32/2f, 0f, -50f);
-        cam2.lookAt(20*32/2,0,0);
+        cam2.position.set(lookX, lookY, -50f);
+        cam2.lookAt(lookX,lookY,0);
         cam2.near = 0.1f;
         cam2.far = 300f;
         cam2.rotate(-50, 1, 0, 0);
@@ -158,6 +169,7 @@ public class Partida implements Screen{
         batch.begin();
         //car.draw(batch);
         carcito.draw(batch);
+        carcitoFerran.draw(batch);
 	    batch.end();
 	    
 
@@ -172,17 +184,39 @@ public class Partida implements Screen{
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
         //car.draw(batch);
-        carcito.draw(batch);
+        /*carcito.draw(batch);
+        carcitoFerran.draw(batch);*/
 	    batch.end();
 	    debugRenderer.render(world, cam2.combined);
 	    batch.begin();
         //car.draw(batch);      
         carcito.draw(batch);
+        carcitoFerran.draw(batch);
 	    batch.end();
 
 	    modelBatch.begin(cam2);
         modelBatch.render(instance, environment);;
         modelBatch.end();
+        
+        /*cam.position.set(carcito.getX(), carcito.getY()-10, -50f);
+        cam.lookAt(carcito.getX(), carcito.getY()-10,0);
+        cam2.position.set(carcitoFerran.getX(), carcitoFerran.getY()-10, -50f);
+        cam2.lookAt(carcitoFerran.getX(), carcitoFerran.getY()-10,0);*/
+        
+        cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
+        cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
+        cam.near = 0.1f;
+        cam.far = 300f;
+        cam.rotate(-50, 1, 0, 0);
+        cam.update();
+        
+        cam2.position.set(carcitoFerran.getX()+carcitoFerran.getWidth()/2, carcitoFerran.getY()-10, -50f);
+        cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
+        cam2.near = 0.1f;
+        cam2.far = 300f;
+        cam2.rotate(-50, 1, 0, 0);
+        cam2.update();
+        
 	}
 
 	@Override

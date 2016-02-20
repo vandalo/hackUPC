@@ -75,7 +75,7 @@ public class MainMenuScreen implements Screen {
 		menu.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y){
-				SocketSender.Connect("10.192.213.124", 5555);
+				SocketSender.Connect("10.192.213.124", 5556);
 				started = true;
 				//gameUI.dispose();
 				//game.setScreen(new StageSelector(mmScreen, game));
@@ -102,9 +102,10 @@ public class MainMenuScreen implements Screen {
       				SocketSender.Snd_txt_Msg(String.valueOf(Gdx.input.getPitch()));
       				Gdx.app.log("Eix X: ", String.valueOf(Gdx.input.getPitch()));
       				n = 0;
+      				//Gdx.app.log("started", "datoooooooos");
       			}
       			else {
-      				Gdx.app.log("started", "false");
+      				//Gdx.app.log("started", "false");
       			}
       			n+=delta;
       			//Gdx.app.log("Eix Y: ", String.valueOf(Gdx.input.getRoll()));

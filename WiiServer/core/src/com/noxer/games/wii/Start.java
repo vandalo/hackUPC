@@ -25,11 +25,12 @@ public class Start extends Game {
 	protected Skin skin;
 	protected Sprite background;
 	public int num_Jugadores;
+	public static Server s;
 	
 	
 	@Override
 	public void create () {
-		Server s = new Server();
+		s = new Server();
 		setScreen(new MainMenuScreen(this));
 	}
 

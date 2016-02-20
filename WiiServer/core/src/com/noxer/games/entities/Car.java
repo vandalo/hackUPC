@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.noxer.games.wii.Partida;
 import com.noxer.games.wii.Server;
+import com.noxer.games.wii.Start;
 
 
 public class Car extends Sprite {
@@ -20,7 +21,7 @@ public class Car extends Sprite {
 	private float velocidadActual;
 	private float turbo;
 	public Body body;
-	public static int VEL_MAX = 50;
+	public static int VEL_MAX = 100;
 	final short COCHE = 0x1;
 	private float factorDeGiro;
 	
@@ -30,9 +31,10 @@ public class Car extends Sprite {
 	private float gir;
 	private boolean freno;
 	private Sprite spriteCenter, spriteGiroI1, spriteGiroI2, spriteGiroD1, spriteGiroD2;
+	private int player;
 	
 	public Car(Partida game, Sprite centrado, Sprite giroI1,
-			Sprite giroI2, Sprite giroD1, Sprite giroD2){
+			Sprite giroI2, Sprite giroD1, Sprite giroD2, int player){
 		super(centrado);
 		spriteW = getWidth(); 
 		spriteH = getHeight();
@@ -44,6 +46,7 @@ public class Car extends Sprite {
 		spriteGiroD1 = giroD1;
 		spriteGiroD2 = giroD2;
 		factorDeGiro = 0;
+		this.player = player;
 		//setPosition(20*32/2, 10);
 		//initBody(world);
 		
@@ -51,6 +54,7 @@ public class Car extends Sprite {
 	
 	public void draw(Batch spriteBatch){
 		update(Gdx.graphics.getDeltaTime());
+		//System.out.println("ENTRO EN EL PUTO DRAW");
 		super.draw(spriteBatch);
 	}
 
@@ -59,30 +63,27 @@ public class Car extends Sprite {
 		//collisionX = false;
 		//collisionY = false;
 		turbo -= deltaTime;
-		if(freno)velocidadActual -= deltaTime*3;
-		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime;
-		gir = Server.giro[0];
+		if(freno)velocidadActual -= deltaTime*8;
+		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*2;
+		gir = (player == 0) ? Start.s.giro[0] : Start.s.giro[1];
+		//gir = Start.s.giro[0];
+		//System.out.println("HOLLAA PUTAA: " + gir);
 		if(gir < -30){
-			factorDeGiro = -0.5f;
 			set(this.spriteGiroI2);
 		}
 		else if(gir < -15){
-			factorDeGiro = -0.25f;
 			set(this.spriteGiroI1);
 		}
 		else if(gir < 15){
-			factorDeGiro = -0.0f;
 			set(this.spriteCenter);
 		}
 		else if(gir < 30){
-			factorDeGiro = 0.25f;
 			set(this.spriteGiroD1);
 		}
 		else{
-			factorDeGiro = 0.5f;
 			set(this.spriteGiroD2);
 		}
-		body.setLinearVelocity(factorDeGiro, 1-factorDeGiro);
+		body.setLinearVelocity(velocidadActual*gir/12, velocidadActual);
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 		
 		
@@ -108,7 +109,10 @@ public class Car extends Sprite {
         fixtureDef.density = 1.1f;
         fixtureDef.restitution = 0.6f;
         fixtureDef.friction = 0.0f;
-      
+
+        	fixtureDef.filter.categoryBits = COCHE;
+        	fixtureDef.filter.maskBits = COCHE;
+        
         //fixtureDef.isSensor = true; --> use it on towers not to react but detect collision
         body.createFixture(fixtureDef);
         shape.dispose();
