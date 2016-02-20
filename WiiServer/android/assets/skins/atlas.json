@@ -1,0 +1,18 @@
+{
+	"com.badlogic.gdx.graphics.Color": {
+		"white": { "r": 1, "g": 1, "b": 1, "a": 1 },
+		"black": { "r": 0, "g": 0, "b": 0, "a": 1 },
+		"red":   { "r": 1, "g": 0, "b": 0, "a": 1 },
+		"green": { "r": 0, "g": 1, "b": 0, "a": 1 },
+		"blue":  { "r": 0, "g": 0, "b": 1, "a": 1 }
+	},
+	"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+		"white": { "file": "font/white.fnt" },
+		"black": { "file": "font/black.fnt" }
+	},
+	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle":  {
+		"contact": { "imageUp": "CONTACT-01", "imageDown": "CONTACT-01", "pressedOffsetX": 1, "pressedOffsetY": -1 },
+		"options": { "imageUp": "OPTIONS-01", "imageDown": "OPTIONS-01", "pressedOffsetX": 1, "pressedOffsetY": -1 },
+		"play": { "imageUp": "PLAY-01", "imageDown": "PLAY-01", "pressedOffsetX": 1, "pressedOffsetY": -1 },
+	}, 
+}
