@@ -30,13 +30,15 @@ public class MainMenuScreen implements Screen {
 	protected Sprite background;
 	private ImageButton menu;
 	private SpriteBatch batch;
-	public int n;
+	public float n;
+	private boolean started;
 	
     public MainMenuScreen(final Client gam) {
         game = gam;
         mmScreen = this; 
         batch = new SpriteBatch();
         n = 0;
+        started = false;
     }
     
 	@Override
@@ -73,7 +75,8 @@ public class MainMenuScreen implements Screen {
 		menu.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y){
-				SocketSender.Connect("192.168.1.42", 5555);
+				SocketSender.Connect("10.192.213.124", 5555);
+				started = true;
 				//gameUI.dispose();
 				//game.setScreen(new StageSelector(mmScreen, game));
 			}
@@ -90,30 +93,35 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		//Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-			background.draw(batch);
-		batch.end();
-        //table.debugTable();
-		//stage.getViewport().apply();
-        stage.act(delta);
-        stage.draw();
-        Gdx.app.debug("RENDER","DONE");
-        boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
-        if (available && n == 500){
-        	
-        	Gdx.app.log("Eix X: ", String.valueOf(Gdx.input.getPitch()));
-        	//Gdx.app.log("Eix Y: ", String.valueOf(Gdx.input.getRoll()));
-        	//Gdx.app.log("Eix Z: ", String.valueOf(Gdx.input.getAzimuth()));
-        	
-        	/*Gdx.app.log("Eix X2: ", String.valueOf(Gdx.input.getAccelerometerX()));
-        	Gdx.app.log("Eix Y2: ", String.valueOf(Gdx.input.getAccelerometerY()));
-        	Gdx.app.log("Eix Z2: ", String.valueOf(Gdx.input.getAccelerometerZ()));*/
-        	 n = 0;
-        }
-        n ++;
+      //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+      		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+      		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+      		//Gdx.app.log("HOLAAA", "PPEEEPIIITOO");
+      		//if (Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer) && n == 5 && started){
+      			if(started && n < 110.5){
+      				SocketSender.Snd_txt_Msg(String.valueOf(Gdx.input.getPitch()));
+      				Gdx.app.log("Eix X: ", String.valueOf(Gdx.input.getPitch()));
+      				n = 0;
+      			}
+      			else {
+      				Gdx.app.log("started", "false");
+      			}
+      			n+=delta;
+      			//Gdx.app.log("Eix Y: ", String.valueOf(Gdx.input.getRoll()));
+      			//Gdx.app.log("Eix Z: ", String.valueOf(Gdx.input.getAzimuth()));
+      			
+      			/*Gdx.app.log("Eix X2: ", String.valueOf(Gdx.input.getAccelerometerX()));
+              	Gdx.app.log("Eix Y2: ", String.valueOf(Gdx.input.getAccelerometerY()));
+              	Gdx.app.log("Eix Z2: ", String.valueOf(Gdx.input.getAccelerometerZ()));*/
+      			//n = 0;
+      		//}
+      		batch.begin();
+      			background.draw(batch);
+      		batch.end();
+              //table.debugTable();
+      		//stage.getViewport().apply();
+              stage.act(delta);
+              stage.draw();
 	}
 
 	@Override

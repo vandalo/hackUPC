@@ -29,7 +29,7 @@ public class Start extends Game {
 	
 	@Override
 	public void create () {
-		//Server s = new Server();
+		Server s = new Server();
 		setScreen(new MainMenuScreen(this));
 	}
 

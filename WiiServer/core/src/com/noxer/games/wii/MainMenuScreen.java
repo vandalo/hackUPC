@@ -29,10 +29,12 @@ public class MainMenuScreen implements Screen {
 	private ImageButton menu;
 	public int num_jugadores;
 	public SpriteBatch batch;
+	private Start game;
 	
 	
     public MainMenuScreen(Start start) {
         //game = gam;
+    	game = start;
         mmScreen = this; 
     }
     
@@ -71,7 +73,7 @@ public class MainMenuScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y){
 				//gameUI.dispose();
-				//setScreen(new StageSelector(mmScreen, game));
+				game.setScreen(new Partida());
 			}
 		});
 		
