@@ -46,6 +46,8 @@ public class auxCar extends ModelInstance {
 		trans = new Vector3();
 		bb = new BoundingBox();
 		velocidadY = velocidadX = 5f;
+		velocidadActual = (float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
+
 		gir = 0;
 		turbo = 0;
 		factorDeGiro = 0;
@@ -58,7 +60,7 @@ public class auxCar extends ModelInstance {
 	
 
 	private float velocitatTotal(){
-		return (float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
+		return velocidadActual;//(float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
 	}
 		
 	public void update(float deltaTime) {
@@ -71,6 +73,7 @@ public class auxCar extends ModelInstance {
 		float velTotal = velocitatTotal();
 		gir = (float) ((player == 0) ? Math.toRadians(Start.s.giro[0]) : Math.toRadians(Start.s.giro[1]));
 		angleGir += (gir*deltaTime);
+		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));
 		velocidadY = (float) (Math.cos(angleGir)*velTotal);
 		velocidadX = (float) (Math.sin(angleGir)*velTotal);
 
@@ -91,8 +94,13 @@ public class auxCar extends ModelInstance {
 		//transform.set(new Vector3(body.getPosition().x,body.getPosition().y,0), new Quaternion(new Vector3(0,0,0),gir));
 		transform.setTranslation(body.getPosition().x, body.getPosition().y, 0);
 		transform.getTranslation(trans);
-		//setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 		
+		//setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
+		if ( velocidadActual < VEL_MAX ) {
+			velocidadActual += 25 * deltaTime;
+			if(velocidadActual > VEL_MAX)
+				velocidadActual = VEL_MAX;
+		}
 		
 	}
 	
