@@ -63,22 +63,26 @@ public class Car extends Sprite {
 		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime;
 		gir = Server.giro[0];
 		if(gir < -30){
-			
+			factorDeGiro = -0.5f;
 			set(this.spriteGiroI2);
 		}
 		else if(gir < -15){
+			factorDeGiro = -0.25f;
 			set(this.spriteGiroI1);
 		}
 		else if(gir < 15){
+			factorDeGiro = -0.0f;
 			set(this.spriteCenter);
 		}
 		else if(gir < 30){
+			factorDeGiro = 0.25f;
 			set(this.spriteGiroD1);
 		}
 		else{
+			factorDeGiro = 0.5f;
 			set(this.spriteGiroD2);
 		}
-		body.setLinearVelocity(0, 10);
+		body.setLinearVelocity(factorDeGiro, 1-factorDeGiro);
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 		
 		
