@@ -121,7 +121,7 @@ public class Partida implements Screen{
 		//cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
 
         background = new Sprite(new Texture("fondo2.png"));
-        background.setSize(WORLD_WIDTH, WORLD_HEIGHT);
+        background.setSize(500, 500);
         background.setPosition(0, 0);
         
         modelBatch = new ModelBatch();
@@ -226,7 +226,7 @@ public class Partida implements Screen{
 	        batch.begin();
 	
 	        tiledMapRenderer.setView(cam.combined, 0, 0,
-	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+	        		500,500);
 	        tiledMapRenderer.render();
 	        batch.end();	    
 		    
