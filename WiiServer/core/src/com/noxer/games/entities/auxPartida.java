@@ -1,4 +1,4 @@
-package com.noxer.games.wii;
+package com.noxer.games.entities;
 
 
 import com.badlogic.gdx.Gdx;
@@ -33,9 +33,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.noxer.games.entities.Car;
-import com.noxer.games.entities.auxCar;
+import com.noxer.games.wii.ContListener;
 
-public class Partida implements Screen{
+public class auxPartida implements Screen{
 	private PerspectiveCamera cam, cam2, camModel;
 	static final int WORLD_WIDTH = 100;
     static final int WORLD_HEIGHT = 100;
@@ -53,10 +53,9 @@ public class Partida implements Screen{
     public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
     Box2DDebugRenderer debugRenderer;
     Car carcito, carcitoFerran;
-    auxCar carDani, carFerran;
     private float lookX, lookY;
 	
-	public Partida(){
+	public auxPartida(){
 		float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera();
@@ -67,7 +66,7 @@ public class Partida implements Screen{
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         
         world = new World(new Vector2(0, 0),true);
-		world.setContactListener(new ContListener(this));
+		//TODO world.setContactListener(new ContListener(this));
 		
 		debugRenderer = new Box2DDebugRenderer();
         
@@ -75,7 +74,7 @@ public class Partida implements Screen{
 /////////////////////////////////////
 		///COCHES
 /////////////////////////////////////
-        carcito = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
+        /*carcito = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
         		new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")), 
         		new Sprite(new Texture("cochehiperrealista-01.png")), 0);
         carcito.setPosition(15*32/2, 10);
@@ -87,7 +86,9 @@ public class Partida implements Screen{
         		new Sprite(new Texture("cochehiperrealista-01.png")), 1);
         carcitoFerran.setPosition(25*32/2, 10);
         carcitoFerran.scale(0.7f);
-        carcitoFerran.initBody(world);
+        carcitoFerran.initBody(world);*/
+		
+		
         ////////
 /////////////////////////////////////
 /////////////////////////////////////
@@ -107,13 +108,13 @@ public class Partida implements Screen{
         model2 = new ObjLoader().loadModel(Gdx.files.internal("car-formula-violet.obj"));
         model = new ObjLoader().loadModel(Gdx.files.internal("car-formula-white.obj"));
         //instance = new ModelInstance(model2, new Vector3(20*32/2f, 150,0));
-        carDani = new auxCar(this, model, new Vector3(17*32/2f, 150,0), 0);
-        carFerran = new auxCar(this, model2, new Vector3(23*32/2f, 150,0), 0);
-        carDani.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
-		carFerran.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
-		carDani.initBody(world);
-		carFerran.initBody(world);
-		//instance.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
+        //TODO carcito = new Car(this, model, new Vector3(17*32/2f, 150,0), 0);
+        //TODO carcitoFerran = new Car(this, model, new Vector3(23*32/2f, 150,0), 0);
+      //TODO carcito.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
+		//TODO carcitoFerran.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
+		
+		carcito.initBody(world);
+		carcitoFerran.initBody(world);
 	}
 
 	@Override
@@ -132,8 +133,6 @@ public class Partida implements Screen{
 			body.setActive(false);
 			bodiesToDestroy.removeValue(body, true);
 		}
-		carDani.update(delta);
-		carFerran.update(delta);
 		
 		cam.update();
         batch.setProjectionMatrix(cam.combined);
@@ -145,16 +144,15 @@ public class Partida implements Screen{
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
         batch.end();
-        batch.begin();
-        carcito.draw(batch);
-        carcitoFerran.draw(batch);
-	    batch.end();
-	    
-	    
-	    modelBatch.begin(cam2);
-        modelBatch.render(carDani, environment);
-        modelBatch.render(carFerran, environment);
+        modelBatch.begin(cam);
+        //TODO modelBatch.render(carcito, environment);
+        //carcitoFerran.draw(batch);
+	    //batch.end();
         modelBatch.end();
+	    
+	    /*modelBatch.begin(cam2);
+        modelBatch.render(instance, environment);
+        modelBatch.end();*/
         
         ////
         ///FINISH PANTALLA TOP
@@ -169,27 +167,30 @@ public class Partida implements Screen{
 	    tiledMapRenderer.setView(cam2.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
+        //car.draw(batch);
+        /*carcito.draw(batch);
+        carcitoFerran.draw(batch);*/
 	    batch.end();
 	    debugRenderer.render(world, cam2.combined);
-	    batch.begin();    
-        carcito.draw(batch);
-        carcitoFerran.draw(batch);
+	    batch.begin();
+        //car.draw(batch);      
+	  //TODO  carcito.draw(batch);
+	  //TODO  carcitoFerran.draw(batch);
 	    batch.end();
 
 	    modelBatch.begin(cam2);
-        modelBatch.render(carDani, environment);
-        modelBatch.render(carFerran, environment);
+        modelBatch.render(instance, environment);
         modelBatch.end();
         
-        cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
-        cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
+      //TODO   cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
+      //TODO   cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.rotate(-50, 1, 0, 0);
         cam.update();
         
-        cam2.position.set(carcitoFerran.getX()+carcitoFerran.getWidth()/2, carcitoFerran.getY()-10, -50f);
-        cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
+      //TODO   cam2.position.set(carcitoFerran.getX()+carcitoFerran.getWidth()/2, carcitoFerran.getY()-10, -50f);
+      //TODO   cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
         cam2.near = 0.1f;
         cam2.far = 300f;
         cam2.rotate(-50, 1, 0, 0);
@@ -209,25 +210,21 @@ public class Partida implements Screen{
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 
