@@ -1,5 +1,6 @@
 package com.noxer.games.wii;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
@@ -12,18 +13,26 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.noxer.games.entities.Car;
 
 public class Partida implements Screen{
 	private PerspectiveCamera cam, cam2;
@@ -38,6 +47,11 @@ public class Partida implements Screen{
     private ModelBatch modelBatch;
     private Model model;
     public ModelInstance instance;
+    public Environment environment;
+    public World world;
+    public Array<Body> bodiesToDestroy = new Array<Body>(false, 16);
+    Box2DDebugRenderer debugRenderer;
+    Car carcito;
 	
 	public Partida(){
 		float w = Gdx.graphics.getWidth();
@@ -49,8 +63,15 @@ public class Partida implements Screen{
         tiledMap = new TmxMapLoader().load("mapa.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         
+        world = new World(new Vector2(0, 0),true);
+		world.setContactListener(new ContListener(this));
+		
+		debugRenderer = new Box2DDebugRenderer();
+        
         car = new Sprite(new Texture("cochehiperrealista-01.png"));
         car.setPosition(20*32/2, 10);
+        //carcito = new Car(world, this, car, car, car, car, car);
+        
         
         System.out.println(tiledMap.getProperties().get("width",Integer.class));
         
@@ -85,6 +106,10 @@ public class Partida implements Screen{
             Usage.Position | Usage.Normal);
         instance = new ModelInstance(model, new Vector3(20*32/2, 50,0));
         modelBatch = new ModelBatch();
+        
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         /*ModelLoader loader = new ObjLoader();
         model = loader.loadModel(Gdx.files.internal("Ferrari2001.obj"));
         instance = new ModelInstance(model);*/
@@ -98,7 +123,16 @@ public class Partida implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);        
+		delta = Math.min(0.06f, delta);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);  
+		world.step(1f/30f, 6, 2);
+		for (Body body : bodiesToDestroy){
+			//world.destroyBody(body);
+			//body.getBody().destroyFixture(body);
+			body.setActive(false);
+			bodiesToDestroy.removeValue(body, true);
+		}
 		//background.draw(batch);
 
 	    /*upperStage.act(delta);  
@@ -136,10 +170,12 @@ public class Partida implements Screen{
 	    batch.end();
 	    batch.begin();
         car.draw(batch);
+        //carcito.draw(batch);
+        debugRenderer.render(world, cam2.combined);
 	    batch.end();
 
 	    modelBatch.begin(cam2);
-        modelBatch.render(instance);;
+        modelBatch.render(instance, environment);;
         modelBatch.end();
 	}
 

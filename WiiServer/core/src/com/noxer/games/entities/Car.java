@@ -20,6 +20,7 @@ public class Car extends Sprite {
 	private float turbo;
 	public Body body;
 	public static int VEL_MAX = 50;
+	final short COCHE = 0x1;
 	
 	
 	
@@ -39,6 +40,7 @@ public class Car extends Sprite {
 		spriteGiroI2 = giroI2;
 		spriteGiroD1 = giroD1;
 		spriteGiroD2 = giroD2;
+		setPosition(20*32/2, 10);
 		initBody(world);
 		
 	}
@@ -90,7 +92,7 @@ public class Car extends Sprite {
         
         //PolygonShape shape = new PolygonShape();
         CircleShape shape = new CircleShape();
-        shape.setRadius(getWidth()/2);
+        shape.setRadius(getWidth());
         //shape.setAsBox(player.getWidth()/2 / 1, player.getHeight()/2 / 1);
 
         FixtureDef fixtureDef = new FixtureDef();
