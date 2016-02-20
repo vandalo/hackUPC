@@ -2,17 +2,28 @@ package com.noxer.games.wii;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.ModelLoader;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector3;
 
 public class Partida implements Screen{
 	private PerspectiveCamera cam, cam2;
@@ -24,7 +35,9 @@ public class Partida implements Screen{
     TiledMapRenderer tiledMapRenderer;
     private OrthographicCamera camera;
     private Sprite car;
-    
+    private ModelBatch modelBatch;
+    private Model model;
+    public ModelInstance instance;
 	
 	public Partida(){
 		float w = Gdx.graphics.getWidth();
@@ -64,6 +77,17 @@ public class Partida implements Screen{
         background = new Sprite(new Texture("fondo2.png"));
         background.setSize(WORLD_WIDTH, WORLD_HEIGHT);
         background.setPosition(0, 0);
+        
+        
+        ModelBuilder modelBuilder = new ModelBuilder();
+        model = modelBuilder.createBox(50f, 50f, 50f, 
+            new Material(ColorAttribute.createDiffuse(Color.GREEN)),
+            Usage.Position | Usage.Normal);
+        instance = new ModelInstance(model, new Vector3(20*32/2, 50,0));
+        modelBatch = new ModelBatch();
+        /*ModelLoader loader = new ObjLoader();
+        model = loader.loadModel(Gdx.files.internal("Ferrari2001.obj"));
+        instance = new ModelInstance(model);*/
 	}
 
 	@Override
@@ -114,7 +138,9 @@ public class Partida implements Screen{
         car.draw(batch);
 	    batch.end();
 
-
+	    modelBatch.begin(cam2);
+        modelBatch.render(instance);;
+        modelBatch.end();
 	}
 
 	@Override
