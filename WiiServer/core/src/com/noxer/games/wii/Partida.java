@@ -35,7 +35,7 @@ import com.badlogic.gdx.utils.Array;
 import com.noxer.games.entities.Car;
 
 public class Partida implements Screen{
-	private PerspectiveCamera cam, cam2;
+	private PerspectiveCamera cam, cam2, camModel;
 	static final int WORLD_WIDTH = 100;
     static final int WORLD_HEIGHT = 100;
     private Sprite background;
@@ -45,7 +45,7 @@ public class Partida implements Screen{
     private OrthographicCamera camera;
     //private Sprite car;
     private ModelBatch modelBatch;
-    private Model model;
+    private Model model, model2;
     public ModelInstance instance;
     public Environment environment;
     public World world;
@@ -115,19 +115,21 @@ public class Partida implements Screen{
         background.setPosition(0, 0);
         
         
-        ModelBuilder modelBuilder = new ModelBuilder();
+       /* ModelBuilder modelBuilder = new ModelBuilder();
         model = modelBuilder.createBox(50f, 50f, 50f, 
             new Material(ColorAttribute.createDiffuse(Color.GREEN)),
             Usage.Position | Usage.Normal);
-        instance = new ModelInstance(model, new Vector3(20*32/2, 50,0));
+        //instance = new ModelInstance(model, new Vector3(20*32/2, 50,0));*/
         modelBatch = new ModelBatch();
         
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-        /*ModelLoader loader = new ObjLoader();
-        model = loader.loadModel(Gdx.files.internal("Ferrari2001.obj"));
-        instance = new ModelInstance(model);*/
+        ModelLoader loader = new ObjLoader();
+        model2 = loader.loadModel(Gdx.files.internal("car-formula-violet.obj"));
+        instance = new ModelInstance(model2, new Vector3(20*32/2f, 150,0));
+        
+		instance.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
 	}
 
 	@Override
@@ -143,35 +145,32 @@ public class Partida implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);  
 		world.step(1f/30f, 6, 2);
 		for (Body body : bodiesToDestroy){
-			//world.destroyBody(body);
-			//body.getBody().destroyFixture(body);
 			body.setActive(false);
 			bodiesToDestroy.removeValue(body, true);
 		}
-		//background.draw(batch);
-
-	    /*upperStage.act(delta);  
-	    bottomStage.act(delta);    */     
 		
 		cam.update();
         batch.setProjectionMatrix(cam.combined);
         Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
         batch.begin();
-	    /*Upper Half*/          
-	    //set the openGl viewport to half the screenheight and starting y from the     middle of the screen
-	    //background.draw(batch);
-	    //tiledMapRenderer.setView(camera);
+
         tiledMapRenderer.setView(cam.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
         batch.end();
         batch.begin();
-        //car.draw(batch);
         carcito.draw(batch);
         carcitoFerran.draw(batch);
 	    batch.end();
 	    
+	    modelBatch.begin(cam2);
+        modelBatch.render(instance, environment);
+        modelBatch.end();
+        
+        ////
+        ///FINISH PANTALLA TOP
+	    ///////////
 
 	    cam2.update();
         batch.setProjectionMatrix(cam2.combined);
@@ -179,7 +178,6 @@ public class Partida implements Screen{
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 	    batch.begin();
 	    /*bottom Half*/     
-	    //set the openGl viewport to half the screenheight and starting y from the     bottom of the screen
 	    tiledMapRenderer.setView(cam2.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
@@ -195,13 +193,8 @@ public class Partida implements Screen{
 	    batch.end();
 
 	    modelBatch.begin(cam2);
-        modelBatch.render(instance, environment);;
+        modelBatch.render(instance, environment);
         modelBatch.end();
-        
-        /*cam.position.set(carcito.getX(), carcito.getY()-10, -50f);
-        cam.lookAt(carcito.getX(), carcito.getY()-10,0);
-        cam2.position.set(carcitoFerran.getX(), carcitoFerran.getY()-10, -50f);
-        cam2.lookAt(carcitoFerran.getX(), carcitoFerran.getY()-10,0);*/
         
         cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
         cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
