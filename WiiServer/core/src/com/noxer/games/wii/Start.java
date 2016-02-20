@@ -1,17 +1,36 @@
 package com.noxer.games.wii;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class Start extends ApplicationAdapter {
+public class Start extends Game {
+	public boolean primerMandoConectado;
+	private Stage stage;
+	private Table table;
+	private ImageButton backArrow;
+	private TextureAtlas atlas;
+	private Skin skinButtons;
+	protected Skin skin;
+	protected Sprite background;
+	public int num_Jugadores;
+	
 	
 	@Override
 	public void create () {
-		Server s = new Server();
+		//Server s = new Server();
+		setScreen(new MainMenuScreen(this));
 	}
 
 	@Override

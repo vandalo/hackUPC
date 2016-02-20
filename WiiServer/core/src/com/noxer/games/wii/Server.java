@@ -20,9 +20,10 @@ public class Server {
 	Mensaje_data mdata = null;
 	ObjectOutputStream oos = null;
 	String TimeStamp;
+	public static float[] giros;
 
 	public Server() {
-
+		
 		try {
 			System.out.println("************ SERVER ****************");
 			// creamos server socket
