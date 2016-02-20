@@ -23,6 +23,7 @@ public class Partida implements Screen{
     private TiledMap tiledMap;
     TiledMapRenderer tiledMapRenderer;
     private OrthographicCamera camera;
+    private Sprite car;
     
 	
 	public Partida(){
@@ -35,10 +36,13 @@ public class Partida implements Screen{
         tiledMap = new TmxMapLoader().load("mapa.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         
+        car = new Sprite(new Texture("cochehiperrealista-01.png"));
+        car.setPosition(20*32/2, 10);
+        
         System.out.println(tiledMap.getProperties().get("width",Integer.class));
         
-		cam = new PerspectiveCamera(60, 300, 15 * (h / w));
-		cam2 = new PerspectiveCamera(30, 15, 15 * (h / w));
+		cam = new PerspectiveCamera(60, 15, 15 * (h / w));
+		cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
 		
 		//cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(20*32/2f, 0f, -50f);
@@ -48,8 +52,8 @@ public class Partida implements Screen{
         cam.rotate(-50, 1, 0, 0);
         cam.update();
         
-        cam2.position.set(15f, 15f, -20f);
-        cam2.lookAt(15,15,0);
+        cam2.position.set(20*32/2f, 0f, -50f);
+        cam2.lookAt(20*32/2,0,0);
         cam2.near = 0.1f;
         cam2.far = 300f;
         cam2.rotate(-50, 1, 0, 0);
@@ -75,6 +79,7 @@ public class Partida implements Screen{
 
 	    /*upperStage.act(delta);  
 	    bottomStage.act(delta);    */     
+		
 		cam.update();
         batch.setProjectionMatrix(cam.combined);
         Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
@@ -87,6 +92,9 @@ public class Partida implements Screen{
         tiledMapRenderer.setView(cam.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
+        batch.end();
+        batch.begin();
+        car.draw(batch);
 	    batch.end();
 	    
 
@@ -97,8 +105,15 @@ public class Partida implements Screen{
 	    batch.begin();
 	    /*bottom Half*/     
 	    //set the openGl viewport to half the screenheight and starting y from the     bottom of the screen
-	    background.draw(batch);
+	    tiledMapRenderer.setView(cam2.combined, 0, 0,
+        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+        tiledMapRenderer.render();
+        car.draw(batch);
 	    batch.end();
+	    batch.begin();
+        car.draw(batch);
+	    batch.end();
+
 
 	}
 
@@ -106,7 +121,7 @@ public class Partida implements Screen{
 	public void resize(int width, int height) {
 		cam.viewportWidth = 100f;
         cam.viewportHeight = 30f * height/width;
-        cam2.viewportWidth = 20f;
+        cam2.viewportWidth = 100f;
         cam2.viewportHeight = 30f * height/width;
         cam.update();
         cam2.update();
