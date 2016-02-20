@@ -37,12 +37,12 @@ public class Partida implements Screen{
         
         System.out.println(tiledMap.getProperties().get("width",Integer.class));
         
-		cam = new PerspectiveCamera(30, 15, 15 * (h / w));
+		cam = new PerspectiveCamera(60, 300, 15 * (h / w));
 		cam2 = new PerspectiveCamera(30, 15, 15 * (h / w));
 		
 		//cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(15f, 15f, -20f);
-        cam.lookAt(15,15,0);
+        cam.position.set(20*32/2f, 0f, -50f);
+        cam.lookAt(20*32/2,0,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.rotate(-50, 1, 0, 0);
@@ -84,7 +84,7 @@ public class Partida implements Screen{
 	    //set the openGl viewport to half the screenheight and starting y from the     middle of the screen
 	    //background.draw(batch);
 	    //tiledMapRenderer.setView(camera);
-        tiledMapRenderer.setView(cam.combined, 0, Gdx.graphics.getHeight()/2,
+        tiledMapRenderer.setView(cam.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
 	    batch.end();
@@ -104,7 +104,7 @@ public class Partida implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		cam.viewportWidth = 20f;
+		cam.viewportWidth = 100f;
         cam.viewportHeight = 30f * height/width;
         cam2.viewportWidth = 20f;
         cam2.viewportHeight = 30f * height/width;
