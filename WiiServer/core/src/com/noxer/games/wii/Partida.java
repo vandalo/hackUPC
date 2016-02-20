@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -68,6 +69,8 @@ public class Partida implements Screen{
     Stage semafor;
     boolean start;
     boolean firstTime;
+	private TextureAtlas atlas, gameUI;
+	protected Skin skin, skin2;
 	
 	public Partida(){
 		firstTime = true;
@@ -85,6 +88,13 @@ public class Partida implements Screen{
 		world.setContactListener(new ContListener(this));
 		timeToStart = 5; 
 		debugRenderer = new Box2DDebugRenderer();
+		
+		atlas = new TextureAtlas("skins/userInterface.pack");
+		gameUI = new TextureAtlas("skins/gameUI.pack");
+		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
+		
+		semafor = new Stage(new StretchViewport(800, 480));
+		
         
 		
 /////////////////////////////////////
@@ -131,6 +141,7 @@ public class Partida implements Screen{
 		carDani.initBody(world);
 		carFerran.initBody(world);
 		//instance.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
+		
 	}
 
 	@Override
@@ -207,6 +218,7 @@ public class Partida implements Screen{
 			carFerran.update(delta);
 		}
 		else{
+			
 			batch.setProjectionMatrix(cam.combined);
 			cam.update();
 	        Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
@@ -261,10 +273,13 @@ public class Partida implements Screen{
 	        if(firstTime){
 	        	carDani.update(delta);
 	        	carFerran.update(delta);
-	        }
+	        }        
 	        firstTime = false;
-								
+	        batch.begin();	
+	        	semafor.draw();	
+	        batch.end();
 		}
+			
 	}
 
 	@Override
@@ -302,23 +317,24 @@ public class Partida implements Screen{
 	}
 	
 	private void showSemafor() {
-		semafor = new Stage(new StretchViewport(300, 150));
+		
+		
 		if(timeToStart < 1)start = true;
-		/*Table table = new Table(skinButtons);
 		
+		Table table = new Table(skin);
 		
-		if(timeToStart > 4)table.setBackground(new Image(new Sprite(new Texture("background.png"))).getDrawable());
-		else if(timeToStart > 3)table.setBackground(new Image(new Sprite(new Texture("background.png"))).getDrawable());
-		else if(timeToStart > 2)table.setBackground(new Image(new Sprite(new Texture("background.png"))).getDrawable());
-		else if(timeToStart > 1)table.setBackground(new Image(new Sprite(new Texture("background.png"))).getDrawable());
-		else table.setBackground(new Image(new Sprite(new Texture("background.png"))).getDrawable());
+		if(timeToStart > 4)table.setBackground(new Image(new Sprite(new Texture("semaforo1.png"))).getDrawable());
+		else if(timeToStart > 3)table.setBackground(new Image(new Sprite(new Texture("semaforo2.png"))).getDrawable());
+		else if(timeToStart > 2)table.setBackground(new Image(new Sprite(new Texture("semaforo3.png"))).getDrawable());
+		else if(timeToStart > 1)table.setBackground(new Image(new Sprite(new Texture("semaforo4-01.png"))).getDrawable());
+		else table.setBackground(new Image(new Sprite(new Texture("semaforo4-01.png"))).getDrawable());
 		//inventary.setBackground(new Image(game.background.getTexture()).getDrawable());
 		
-		table.setBounds(150, 60, 550, 360);
+		table.setBounds(170, 60, 550, 330);
 				
 		semafor.addActor(table);
 		
-		table.getColor().mul(1, 1, 1, 0.85f);*/
+		table.getColor().mul(1, 1, 1, 0.85f);
 //		table.add(backArrow).align(Align.topLeft).pad(10);*/
 	}
 	

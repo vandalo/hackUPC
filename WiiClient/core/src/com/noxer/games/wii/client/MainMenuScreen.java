@@ -3,6 +3,7 @@ package com.noxer.games.wii.client;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen{
 
 	final Client game;
 	final MainMenuScreen mmScreen;
@@ -33,7 +34,7 @@ public class MainMenuScreen implements Screen {
 	public float n;
 	private boolean started;
 	
-    public MainMenuScreen(final Client gam) {
+    public MainMenuScreen(final Client gam){
         game = gam;
         mmScreen = this; 
         batch = new SpriteBatch();
@@ -86,15 +87,16 @@ public class MainMenuScreen implements Screen {
 		stage.addActor(table);
 		table.addActor(menu);
 		
-		background = new Sprite(new Texture("fondo2.png"));
+		background = new Sprite(new Texture("CONECT-01.png"));
 		background.setBounds(0, 0, Client.width, Client.height);
 		//background.setBounds(0, 0, 800, 480);
+		
 	}
 
 	@Override
 	public void render(float delta) {
       //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-      		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+      		Gdx.gl.glClearColor(255, 255, 255, 1);
       		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       		//Gdx.app.log("HOLAAA", "PPEEEPIIITOO");
       		//if (Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer) && n == 5 && started){
@@ -102,6 +104,7 @@ public class MainMenuScreen implements Screen {
       				SocketSender.Snd_txt_Msg(String.valueOf(Gdx.input.getPitch()));
       				Gdx.app.log("Eix X: ", String.valueOf(Gdx.input.getPitch()));
       				n = 0;
+      				background = new Sprite(new Texture("POWER-01.png"));
       				//Gdx.app.log("started", "datoooooooos");
       			}
       			else {
