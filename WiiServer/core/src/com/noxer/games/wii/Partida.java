@@ -184,7 +184,7 @@ public class Partida implements Screen{
 	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
 	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
 	        cam.near = 0.1f;
-	        cam.far = 300f;
+	        cam.far = 3000f;
 	        cam.rotate(-50, 1, 0, 0);
 	        cam.update();
 	        ////
@@ -210,7 +210,7 @@ public class Partida implements Screen{
 	        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40,0);
 	        	        
 	        cam2.near = 0.1f;
-	        cam2.far = 300f;
+	        cam2.far = 3000f;
 	        cam2.rotate(-50, 1, 0, 0);
 	        cam2.update();
 	        
@@ -238,7 +238,11 @@ public class Partida implements Screen{
 	      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
 	        //cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
 	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
-	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
+	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-45,0);
+	        
+	        //cam.position.set((float) -Math.cos(carDani.angleGir)*20+carDani.body.getPosition().x,(float) -Math.sin(carDani.angleGir)*20+carDani.body.getPosition().y,0f);
+	        //cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-45,0);
+	        
 	        cam.near = 0.1f;
 	        cam.far = 300f;
 	        cam.rotate(-50, 1, 0, 0);
@@ -263,7 +267,7 @@ public class Partida implements Screen{
 	        modelBatch.end();
 	        
 	        cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
-	        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40,0);
+	        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-45,0);
 	        	        
 	        cam2.near = 0.1f;
 	        cam2.far = 300f;

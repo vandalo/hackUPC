@@ -83,7 +83,7 @@ public class MainMenuScreen implements Screen {
 		stage.addActor(table);
 		table.addActor(menu);
 		
-		background = new Sprite(new Texture("fondo2.png"));
+		background = new Sprite(new Texture("background-800480-01.png"));
 		//background.setBounds(0, 0, AquariumDeluxe.width, AquariumDeluxe.height);
 		//background.setBounds(0, 0, 800, 480);
 	}
