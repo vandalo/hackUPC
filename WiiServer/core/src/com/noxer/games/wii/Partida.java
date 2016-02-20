@@ -43,7 +43,7 @@ public class Partida implements Screen{
     private TiledMap tiledMap;
     TiledMapRenderer tiledMapRenderer;
     private OrthographicCamera camera;
-    private Sprite car;
+    //private Sprite car;
     private ModelBatch modelBatch;
     private Model model;
     public ModelInstance instance;
@@ -68,8 +68,8 @@ public class Partida implements Screen{
 		
 		debugRenderer = new Box2DDebugRenderer();
         
-        car = new Sprite(new Texture("cochehiperrealista-01.png"));
-        car.setPosition(20*32/2, 10);
+        //car = new Sprite(new Texture("cochehiperrealista-01.png"));
+        //car.setPosition(20*32/2, 10);
         carcito = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
         		new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")), 
         		new Sprite(new Texture("cochehiperrealista-01.png")));
@@ -156,7 +156,8 @@ public class Partida implements Screen{
         tiledMapRenderer.render();
         batch.end();
         batch.begin();
-        car.draw(batch);
+        //car.draw(batch);
+        carcito.draw(batch);
 	    batch.end();
 	    
 
@@ -170,12 +171,13 @@ public class Partida implements Screen{
 	    tiledMapRenderer.setView(cam2.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
-        car.draw(batch);
-	    batch.end();
-	    batch.begin();
-        car.draw(batch);
+        //car.draw(batch);
         carcito.draw(batch);
-        debugRenderer.render(world, cam2.combined);
+	    batch.end();
+	    debugRenderer.render(world, cam2.combined);
+	    batch.begin();
+        //car.draw(batch);      
+        carcito.draw(batch);
 	    batch.end();
 
 	    modelBatch.begin(cam2);

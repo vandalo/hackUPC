@@ -22,6 +22,7 @@ public class Car extends Sprite {
 	public Body body;
 	public static int VEL_MAX = 50;
 	final short COCHE = 0x1;
+	private float factorDeGiro;
 	
 	
 	
@@ -42,6 +43,7 @@ public class Car extends Sprite {
 		spriteGiroI2 = giroI2;
 		spriteGiroD1 = giroD1;
 		spriteGiroD2 = giroD2;
+		factorDeGiro = 0;
 		//setPosition(20*32/2, 10);
 		//initBody(world);
 		
@@ -61,6 +63,7 @@ public class Car extends Sprite {
 		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime;
 		gir = Server.giro[0];
 		if(gir < -30){
+			
 			set(this.spriteGiroI2);
 		}
 		else if(gir < -15){
@@ -75,8 +78,7 @@ public class Car extends Sprite {
 		else{
 			set(this.spriteGiroD2);
 		}
-		
-		body.setLinearVelocity(body.getLinearVelocity().x, -body.getLinearVelocity().y);
+		body.setLinearVelocity(0, 10);
 		setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
 		
 		
