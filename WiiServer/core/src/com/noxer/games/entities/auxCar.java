@@ -28,8 +28,11 @@ public class auxCar extends ModelInstance {
 	private float factorDeGiro;
 	public BoundingBox bb;
 	public Vector3 trans;
+	private float velocidadX, velocidadY;
+	boolean firstUpdate;
+	public float angleGir;
 	
-	
+
 	
 	//Per BORRAR
 	private float gir;
@@ -39,52 +42,52 @@ public class auxCar extends ModelInstance {
 	
 	public auxCar(Partida game, Model model, Vector3 pos, int player){
 		super(model, pos);
+		firstUpdate = true;
 		trans = new Vector3();
 		bb = new BoundingBox();
-		velocidadActual = 0;
+		velocidadY = velocidadX = 5f;
+		gir = 0;
 		turbo = 0;
 		factorDeGiro = 0;
 		this.player = player;
 		this.pos = pos;
+		angleGir = 0;
+		
 		
 	}
 	
 
-	public void update(float deltaTime) {	
-		//calculateBoundingBox(bb);
-		//setNivelPez();
-		//collisionX = false;
-		//collisionY = false;
+	private float velocitatTotal(){
+		return (float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
+	}
+		
+	public void update(float deltaTime) {
+		if(firstUpdate){
+			//velocidadX = 0.1f;
+			firstUpdate = false;
+		}
+
 		turbo -= deltaTime;
-		if(freno)velocidadActual -= deltaTime*8;
-		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*5;
-		gir = (player == 0) ? Start.s.giro[0] : Start.s.giro[1];
-		//gir = Start.s.giro[0];
-		//System.out.println("HOLLAA PUTAA: " + gir);
-		if(gir < -30){
-			//set(this.spriteGiroI2);
+		float velTotal = velocitatTotal();
+		gir = (float) ((player == 0) ? Math.toRadians(Start.s.giro[0]) : Math.toRadians(Start.s.giro[1]));
+		angleGir += (gir*deltaTime);
+		velocidadY = (float) (Math.cos(angleGir)*velTotal);
+		velocidadX = (float) (Math.sin(angleGir)*velTotal);
+
+		
+		if(freno){
+			velocidadY -= deltaTime*4;
+			velocidadX -= deltaTime*4;
 		}
-		else if(gir < -15){
-			//set(this.spriteGiroI1);
-		}
-		else if(gir < 15){
-			//set(this.spriteCenter);
-		}
-		else if(gir < 30){
-			//set(this.spriteGiroD1);
-		}
-		else{
-			//set(this.spriteGiroD2);
-		}
-		velocidadActual+=gir/5;
-		body.setLinearVelocity(velocidadActual*gir/12, velocidadActual);
-		body.setAngularVelocity(-gir/24);
-		if (body.getAngle() >= 60){
+
+		body.setLinearVelocity(velocidadX, velocidadY);
+		body.setAngularVelocity(angleGir);
+		/*if (body.getAngle() >= 60){
 			body.setTransform(body.getPosition().x, body.getPosition().y, 60);
 		}
 		else if (body.getAngle() <= -60){
 			body.setTransform(body.getPosition().x, body.getPosition().y, -60);
-		}
+		}*/
 		//transform.set(new Vector3(body.getPosition().x,body.getPosition().y,0), new Quaternion(new Vector3(0,0,0),gir));
 		transform.setTranslation(body.getPosition().x, body.getPosition().y, 0);
 		transform.getTranslation(trans);
@@ -92,6 +95,7 @@ public class auxCar extends ModelInstance {
 		
 		
 	}
+	
 	
 	public void initBody(World world) {
 		bb = new BoundingBox();

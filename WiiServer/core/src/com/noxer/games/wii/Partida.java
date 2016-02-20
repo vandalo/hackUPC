@@ -54,6 +54,7 @@ public class Partida implements Screen{
     Box2DDebugRenderer debugRenderer;
     Car carcito, carcitoFerran;
     auxCar carDani, carFerran;
+    private float timeToStart;  
     private float lookX, lookY;
 	
 	public Partida(){
@@ -68,7 +69,7 @@ public class Partida implements Screen{
         
         world = new World(new Vector2(0, 0),true);
 		world.setContactListener(new ContListener(this));
-		
+		timeToStart = 5; 
 		debugRenderer = new Box2DDebugRenderer();
         
 		
@@ -127,6 +128,7 @@ public class Partida implements Screen{
 	@Override
 	public void render(float delta) {
 		delta = Math.min(0.06f, delta);
+		timeToStart -= delta;
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);  
 		world.step(1f/30f, 6, 2);
@@ -188,6 +190,11 @@ public class Partida implements Screen{
         //cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
         cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
         cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40,0);
+        
+        //cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
+        //cam2.lookAt(carFerran.body.getPosition().x,carFerran.body.getPosition().y,0);
+        
+        
         cam2.near = 0.1f;
         cam2.far = 300f;
         cam2.rotate(-50, 1, 0, 0);

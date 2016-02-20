@@ -75,7 +75,7 @@ public class MainMenuScreen implements Screen {
 		menu.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y){
-				SocketSender.Connect("10.192.213.124", 5556);
+				SocketSender.Connect("10.4.180.118", 5556); 
 				started = true;
 				//gameUI.dispose();
 				//game.setScreen(new StageSelector(mmScreen, game));
