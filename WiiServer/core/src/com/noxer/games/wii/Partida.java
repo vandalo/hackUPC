@@ -71,6 +71,9 @@ public class Partida implements Screen{
     boolean firstTime;
 	private TextureAtlas atlas, gameUI;
 	protected Skin skin, skin2;
+	private int xVRP, yVRP;
+	//xVRP = xObs + R * cos(angle);
+    //zVRP = (zObs + R * sin(angle));
 	
 	public Partida(){
 		firstTime = true;
@@ -158,6 +161,8 @@ public class Partida implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT); 
 		showSemafor();
 		if(start){
+			carDani.update(delta);
+			carFerran.update(delta);
 			world.step(1f/30f, 6, 2);
 			for (Body body : bodiesToDestroy){
 				body.setActive(false);
@@ -169,8 +174,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
 	        batch.begin();
 	
-	        tiledMapRenderer.setView(cam.combined, 0, 0,
-	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+	        tiledMapRenderer.setView(cam.combined, -1500, -1500,
+	        		3000,3000);
 	        tiledMapRenderer.render();
 	        batch.end();	    
 		    
@@ -181,8 +186,11 @@ public class Partida implements Screen{
 	        
 	      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
 	        //cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
+	        
 	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
-	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
+	        xVRP = (int) (carDani.trans.x + 20 * Math.cos(carDani.angleGir));
+	        yVRP = (int) (carDani.trans.y + 20 * Math.sin(carDani.angleGir));
+	        cam.lookAt(xVRP,yVRP,0);
 	        cam.near = 0.1f;
 	        cam.far = 3000f;
 	        cam.rotate(-50, 1, 0, 0);
@@ -196,8 +204,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 		    batch.begin();
 		    /*bottom Half*/     
-		    tiledMapRenderer.setView(cam2.combined, 0, 0,
-	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+		    tiledMapRenderer.setView(cam2.combined, -1500, -1500,
+	        		3000,3000);
 	        tiledMapRenderer.render();
 		    batch.end();
 		    debugRenderer.render(world, cam2.combined); 
@@ -206,17 +214,21 @@ public class Partida implements Screen{
 	        modelBatch.render(carFerran, environment);
 	        modelBatch.end();
 	        
-	        cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
-	        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40,0);
+	        cam2.position.set(carFerran.trans.x+ carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
+	        xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir));
+	        yVRP = (int) (carFerran.trans.y + 20 * Math.sin(carFerran.angleGir));
+	        cam2.lookAt(xVRP,yVRP,0);
 	        	        
 	        cam2.near = 0.1f;
 	        cam2.far = 3000f;
 	        cam2.rotate(-50, 1, 0, 0);
 	        cam2.update();
 	        
-	        carDani.update(delta);
-			carFerran.update(delta);
+	        
 		}
+		/////////////////////////
+		////////////////////////
+		//////////////////////
 		else{
 			
 			batch.setProjectionMatrix(cam.combined);
@@ -225,8 +237,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
 	        batch.begin();
 	
-	        tiledMapRenderer.setView(cam.combined, 0, 0,
-	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+	        tiledMapRenderer.setView(cam.combined, -1500, -1500,
+	        		3000,3000);
 	        tiledMapRenderer.render();
 	        batch.end();	    
 		    
@@ -237,14 +249,15 @@ public class Partida implements Screen{
 	        
 	      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
 	        //cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
-	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
-	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-45,0);
-	        
-	        //cam.position.set((float) -Math.cos(carDani.angleGir)*20+carDani.body.getPosition().x,(float) -Math.sin(carDani.angleGir)*20+carDani.body.getPosition().y,0f);
+	        //cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
 	        //cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-45,0);
-	        
+	        xVRP = (int) (carDani.trans.x + 20 * Math.cos(carDani.angleGir));
+	        yVRP = (int) (carDani.trans.y + 20 * Math.sin(carDani.angleGir));
+	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
+	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
+	        //zVRP = (zObs + R * sin(angle));
 	        cam.near = 0.1f;
-	        cam.far = 300f;
+	        cam.far = 3000f;
 	        cam.rotate(-50, 1, 0, 0);
 	        cam.update();
 	        ////
@@ -256,8 +269,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 		    batch.begin();
 		    /*bottom Half*/     
-		    tiledMapRenderer.setView(cam2.combined, 0, 0,
-	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
+		    tiledMapRenderer.setView(cam2.combined, -1500, -1500,
+	        		3000,3000);
 	        tiledMapRenderer.render();
 		    batch.end();
 		    debugRenderer.render(world, cam2.combined); 
@@ -266,6 +279,8 @@ public class Partida implements Screen{
 	        modelBatch.render(carFerran, environment);
 	        modelBatch.end();
 	        
+	        //xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir));
+	        //yVRP = (int) (carFerran.trans.y + 20 * Math.sin(carFerran.angleGir));
 	        cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
 	        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-45,0);
 	        	        
