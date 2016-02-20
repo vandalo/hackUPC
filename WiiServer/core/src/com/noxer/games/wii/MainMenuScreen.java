@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -31,11 +33,11 @@ public class MainMenuScreen implements Screen {
 	public SpriteBatch batch;
 	private Start game;
 	
-	
     public MainMenuScreen(Start start) {
         //game = gam;
     	game = start;
         mmScreen = this; 
+       
     }
     
 	@Override
