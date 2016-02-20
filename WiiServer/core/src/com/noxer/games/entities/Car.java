@@ -63,7 +63,7 @@ public class Car extends Sprite {
 		//collisionY = false;
 		turbo -= deltaTime;
 		if(freno)velocidadActual -= deltaTime*8;
-		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*8;
+		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*4;
 		gir = (player == 0) ? Start.s.giro[0] : Start.s.giro[1];
 		//gir = Start.s.giro[0];
 		//System.out.println("HOLLAA PUTAA: " + gir);

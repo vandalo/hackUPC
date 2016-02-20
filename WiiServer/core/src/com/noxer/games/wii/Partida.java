@@ -63,7 +63,7 @@ public class Partida implements Screen{
         camera.setToOrtho(false,w,h);
         camera.update();
         batch = new SpriteBatch();
-        tiledMap = new TmxMapLoader().load("mapa.tmx");
+        tiledMap = new TmxMapLoader().load("mapa-cercle.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         
         world = new World(new Vector2(0, 0),true);
@@ -107,10 +107,12 @@ public class Partida implements Screen{
         model2 = new ObjLoader().loadModel(Gdx.files.internal("car-formula-violet.obj"));
         model = new ObjLoader().loadModel(Gdx.files.internal("car-formula-white.obj"));
         //instance = new ModelInstance(model2, new Vector3(20*32/2f, 150,0));
-        carDani = new auxCar(this, model, new Vector3(17*32/2f, 150,0), 0);
-        carFerran = new auxCar(this, model2, new Vector3(23*32/2f, 150,0), 0);
-        carDani.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
-		carFerran.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
+        //carDani = new auxCar(this, model, new Vector3(52*32/2f, 100+90*32/2f,0), 0);
+        //carFerran = new auxCar(this, model2, new Vector3(54*32/2f, 100+90*32/2f,0), 0);
+        carDani = new auxCar(this, model, new Vector3(15*32/2, 100,0), 0);
+        carFerran = new auxCar(this, model2, new Vector3(18*32/2, 100,0), 1);
+        carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
+		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
 		carDani.initBody(world);
 		carFerran.initBody(world);
 		//instance.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
@@ -132,11 +134,10 @@ public class Partida implements Screen{
 			body.setActive(false);
 			bodiesToDestroy.removeValue(body, true);
 		}
-		carDani.update(delta);
-		carFerran.update(delta);
 		
+		
+		batch.setProjectionMatrix(cam.combined);
 		cam.update();
-        batch.setProjectionMatrix(cam.combined);
         Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
         batch.begin();
@@ -144,24 +145,28 @@ public class Partida implements Screen{
         tiledMapRenderer.setView(cam.combined, 0, 0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);
         tiledMapRenderer.render();
-        batch.end();
-        batch.begin();
-        carcito.draw(batch);
-        carcitoFerran.draw(batch);
-	    batch.end();
+        batch.end();	    
 	    
-	    
-	    modelBatch.begin(cam2);
+	    modelBatch.begin(cam);
         modelBatch.render(carDani, environment);
         modelBatch.render(carFerran, environment);
         modelBatch.end();
+        
+      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
+        //cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
+        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
+        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
+        cam.near = 0.1f;
+        cam.far = 300f;
+        cam.rotate(-50, 1, 0, 0);
+        cam.update();
         
         ////
         ///FINISH PANTALLA TOP
 	    ///////////
 
-	    cam2.update();
         batch.setProjectionMatrix(cam2.combined);
+	    cam2.update();
         Gdx.gl.glViewport(0,0,
         		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 	    batch.begin();
@@ -171,30 +176,25 @@ public class Partida implements Screen{
         tiledMapRenderer.render();
 	    batch.end();
 	    debugRenderer.render(world, cam2.combined);
-	    batch.begin();    
-        carcito.draw(batch);
-        carcitoFerran.draw(batch);
-	    batch.end();
 
+	  
+	    
 	    modelBatch.begin(cam2);
         modelBatch.render(carDani, environment);
         modelBatch.render(carFerran, environment);
         modelBatch.end();
         
-        cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
-        cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
-        cam.near = 0.1f;
-        cam.far = 300f;
-        cam.rotate(-50, 1, 0, 0);
-        cam.update();
-        
-        cam2.position.set(carcitoFerran.getX()+carcitoFerran.getWidth()/2, carcitoFerran.getY()-10, -50f);
-        cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
+      //cam2.position.set(carcitoFerran.getX()+carcitoFerran.getWidth()/2, carcitoFerran.getY()-10, -50f);
+        //cam2.lookAt(carcitoFerran.getX()+carcitoFerran.getWidth()/2,carcitoFerran.getY()-10,0);
+        cam2.position.set(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
+        cam2.lookAt(carFerran.trans.x+carFerran.bb.getWidth()*15/2, carFerran.trans.y-40,0);
         cam2.near = 0.1f;
         cam2.far = 300f;
         cam2.rotate(-50, 1, 0, 0);
         cam2.update();
         
+        carDani.update(delta);
+		carFerran.update(delta);
 	}
 
 	@Override

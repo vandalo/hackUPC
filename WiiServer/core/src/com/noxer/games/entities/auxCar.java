@@ -57,7 +57,7 @@ public class auxCar extends ModelInstance {
 		//collisionY = false;
 		turbo -= deltaTime;
 		if(freno)velocidadActual -= deltaTime*8;
-		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*14;
+		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime*5;
 		gir = (player == 0) ? Start.s.giro[0] : Start.s.giro[1];
 		//gir = Start.s.giro[0];
 		//System.out.println("HOLLAA PUTAA: " + gir);
@@ -76,7 +76,15 @@ public class auxCar extends ModelInstance {
 		else{
 			//set(this.spriteGiroD2);
 		}
+		velocidadActual+=gir/5;
 		body.setLinearVelocity(velocidadActual*gir/12, velocidadActual);
+		body.setAngularVelocity(-gir/24);
+		if (body.getAngle() >= 60){
+			body.setTransform(body.getPosition().x, body.getPosition().y, 60);
+		}
+		else if (body.getAngle() <= -60){
+			body.setTransform(body.getPosition().x, body.getPosition().y, -60);
+		}
 		//transform.set(new Vector3(body.getPosition().x,body.getPosition().y,0), new Quaternion(new Vector3(0,0,0),gir));
 		transform.setTranslation(body.getPosition().x, body.getPosition().y, 0);
 		transform.getTranslation(trans);
@@ -100,7 +108,7 @@ public class auxCar extends ModelInstance {
         PolygonShape shape = new PolygonShape();
         //CircleShape shape = new CircleShape();
         //shape.setRadius(getWidth()/2);
-        shape.setAsBox( bb.getWidth()*20/2, bb.getDepth()*20/2);
+        shape.setAsBox( bb.getWidth()*15/2, bb.getDepth()*15/2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
