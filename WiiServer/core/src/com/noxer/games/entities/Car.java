@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.noxer.games.wii.Partida;
 import com.noxer.games.wii.Server;
@@ -29,8 +30,9 @@ public class Car extends Sprite {
 	private boolean freno;
 	private Sprite spriteCenter, spriteGiroI1, spriteGiroI2, spriteGiroD1, spriteGiroD2;
 	
-	public Car(World world, Partida game, Sprite centrado, Sprite giroI1,
+	public Car(Partida game, Sprite centrado, Sprite giroI1,
 			Sprite giroI2, Sprite giroD1, Sprite giroD2){
+		super(centrado);
 		spriteW = getWidth(); 
 		spriteH = getHeight();
 		velocidadActual = 0;
@@ -40,14 +42,14 @@ public class Car extends Sprite {
 		spriteGiroI2 = giroI2;
 		spriteGiroD1 = giroD1;
 		spriteGiroD2 = giroD2;
-		setPosition(20*32/2, 10);
-		initBody(world);
+		//setPosition(20*32/2, 10);
+		//initBody(world);
 		
 	}
 	
 	public void draw(Batch spriteBatch){
-			update(Gdx.graphics.getDeltaTime());
-			super.draw(spriteBatch);
+		update(Gdx.graphics.getDeltaTime());
+		super.draw(spriteBatch);
 	}
 
 	protected void update(float deltaTime) {		
@@ -90,10 +92,10 @@ public class Car extends Sprite {
         body.setUserData(this);
         //((Sprite)body.getUserData()).setPosition(body.getPosition().x,body.getPosition().y);
         
-        //PolygonShape shape = new PolygonShape();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(getWidth());
-        //shape.setAsBox(player.getWidth()/2 / 1, player.getHeight()/2 / 1);
+        PolygonShape shape = new PolygonShape();
+        //CircleShape shape = new CircleShape();
+        //shape.setRadius(getWidth()/2);
+        shape.setAsBox(getWidth()/2, getHeight()/2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

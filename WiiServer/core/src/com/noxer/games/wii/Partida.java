@@ -70,7 +70,11 @@ public class Partida implements Screen{
         
         car = new Sprite(new Texture("cochehiperrealista-01.png"));
         car.setPosition(20*32/2, 10);
-        //carcito = new Car(world, this, car, car, car, car, car);
+        carcito = new Car(this, new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")),
+        		new Sprite(new Texture("cochehiperrealista-01.png")), new Sprite(new Texture("cochehiperrealista-01.png")), 
+        		new Sprite(new Texture("cochehiperrealista-01.png")));
+        carcito.setPosition(20*32/2, 10);
+        carcito.initBody(world);
         
         
         System.out.println(tiledMap.getProperties().get("width",Integer.class));
@@ -170,7 +174,7 @@ public class Partida implements Screen{
 	    batch.end();
 	    batch.begin();
         car.draw(batch);
-        //carcito.draw(batch);
+        carcito.draw(batch);
         debugRenderer.render(world, cam2.combined);
 	    batch.end();
 
