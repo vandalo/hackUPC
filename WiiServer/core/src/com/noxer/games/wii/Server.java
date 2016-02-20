@@ -23,10 +23,12 @@ public class Server {
 	Mensaje_data mdata = null;
 	ObjectOutputStream oos = null;
 	String TimeStamp;
+	public static float giro[];
 	
 
 	public Server() {
-
+		giro = new float[2];
+		giro[0] = giro[1] = 0;
 		try {
 			System.out.println("************ SERVER ****************");
 			// creamos server socket
@@ -68,6 +70,9 @@ public class Server {
 	    					System.out.println("socket2 OPEN TOO");
 	    					if(skCliente1.getInputStream().available()>0){
 	    						aux1 = new BufferedReader(new InputStreamReader(skCliente1.getInputStream())).readLine();
+	    						if(aux1!= "-180"){
+	    							giro[0] = Float.parseFloat(aux1);
+	    						}
 	    					}
 	    					//else aux1 = "-180"; //SIGNIFICA QUE NO HAY CAMBIO
     						if (!aux1.equalsIgnoreCase("cerrar")) {

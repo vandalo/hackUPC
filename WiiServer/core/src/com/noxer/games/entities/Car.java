@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.noxer.games.wii.Partida;
+import com.noxer.games.wii.Server;
 
 
 public class Car extends Sprite {
@@ -54,7 +55,7 @@ public class Car extends Sprite {
 		turbo -= deltaTime;
 		if(freno)velocidadActual -= deltaTime*3;
 		else if(velocidadActual < VEL_MAX) velocidadActual += deltaTime;
-		
+		gir = Server.giro[0];
 		if(gir < -30){
 			set(this.spriteGiroI2);
 		}
