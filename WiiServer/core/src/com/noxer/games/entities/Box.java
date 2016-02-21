@@ -18,7 +18,7 @@ import com.noxer.games.wii.Partida;
 import com.noxer.games.wii.Start;
 
 
-public class auxCar extends ModelInstance {
+public class Box extends ModelInstance {
 	protected Vector2 velocity = new Vector2();
 	private float velocidadActual;
 	private float turbo;
@@ -38,9 +38,8 @@ public class auxCar extends ModelInstance {
 	private float gir;
 	private boolean freno;
 	private Vector3 pos;
-	private int player;
 	
-	public auxCar(Partida game, Model model, Vector3 pos, int player){
+	public Box(Partida game, Model model, Vector3 pos){
 		super(model, pos);
 		firstUpdate = true;
 		trans = new Vector3();
@@ -48,10 +47,6 @@ public class auxCar extends ModelInstance {
 		velocidadY = velocidadX = 5f;
 		velocidadActual = (float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
 
-		gir = 0;
-		turbo = 0;
-		factorDeGiro = 0;
-		this.player = player;
 		this.pos = pos;
 		angleGir = 0;
 		
@@ -69,39 +64,7 @@ public class auxCar extends ModelInstance {
 			firstUpdate = false;
 		}
 
-		turbo -= deltaTime;
-		float velTotal = velocitatTotal();
-		gir = (float) ((player == 0) ? Math.toRadians(Start.s.giro[0]) : Math.toRadians(Start.s.giro[1]));
-		angleGir += (gir*deltaTime);
-		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));
-		velocidadY = (float) (Math.cos(angleGir)*velTotal);
-		velocidadX = (float) (Math.sin(angleGir)*velTotal);
-
-		
-		if(freno){
-			velocidadY -= deltaTime*4;
-			velocidadX -= deltaTime*4;
-		}
-
-		body.setLinearVelocity(velocidadX, velocidadY);
-		body.setAngularVelocity(0.1f);
-		/*if (body.getAngle() >= 60){
-			body.setTransform(body.getPosition().x, body.getPosition().y, 60);
-		}
-		else if (body.getAngle() <= -60){
-			body.setTransform(body.getPosition().x, body.getPosition().y, -60);
-		}*/
-		//transform.set(new Vector3(body.getPosition().x,body.getPosition().y,0), new Quaternion(new Vector3(0,0,0),gir));
-		transform.setTranslation(body.getPosition().x, body.getPosition().y, 0);
-		transform.getTranslation(trans);
-		
-		//setPosition(body.getPosition().x - spriteW/2, body.getPosition().y - spriteH/2);
-		if ( velocidadActual < VEL_MAX ) {
-			velocidadActual += 25 * deltaTime;
-			if(velocidadActual > VEL_MAX)
-				velocidadActual = VEL_MAX;
-		}
-		
+		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));		
 	}
 	
 	
@@ -109,10 +72,7 @@ public class auxCar extends ModelInstance {
 		bb = new BoundingBox();
 		calculateBoundingBox(bb);
 		BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        //bodyDef.fixedRotation = true;
-        bodyDef.linearDamping = 0.0f;
-        bodyDef.fixedRotation = true;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(pos.x + bb.getWidth()/2, pos.y + bb.getDepth()/2);
         body = world.createBody(bodyDef);
         body.setUserData(this);
@@ -121,7 +81,7 @@ public class auxCar extends ModelInstance {
         PolygonShape shape = new PolygonShape();
         //CircleShape shape = new CircleShape();
         //shape.setRadius(getWidth()/2);
-        shape.setAsBox( bb.getWidth()*15/2, bb.getDepth()*15/2);
+        shape.setAsBox( bb.getWidth()*5/2, bb.getDepth()*5/2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

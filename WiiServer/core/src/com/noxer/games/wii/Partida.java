@@ -217,14 +217,14 @@ public class Partida implements Screen{
 	        modelBatch.end();
 	        
 	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
-	        		carFerran.trans.y-30, 
-	        		-50f);
+	        		carFerran.trans.y-50, 
+	        		-70f);
 	        xVRP = (float) (cam2.position.x + 10*Math.cos(carFerran.angleGir - Math.PI/2));
 	        yVRP = (float) (cam2.position.y + 10*Math.sin(carFerran.angleGir - Math.PI/2));
 	        //xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
 	        //yVRP = (int) (carFerran.trans.y - 20 - 20 * Math.sin(carFerran.angleGir-Math.PI/2));
 	        cam2.lookAt(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
-	        		carFerran.trans.y-40, 
+	        		carFerran.trans.y-50, 
 	        		0);
 	        
 	        /*cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
