@@ -51,7 +51,10 @@ public class Server {
 	    				IP_client1 = skCliente1.getInetAddress().toString();
 	    				System.out.println("[" + TimeStamp + "] Conectado al cliente "
 	    						+ "IP:" + IP_client1);
-	    				
+	    				while(skCliente1.getInetAddress().toString() == "/127.0.0.1"){
+	    					skCliente1.close();
+	    					skCliente1 = skServidor1.accept();
+	    				}
 	    				//skCliente2 = skServidor2.accept();
 	    				/*IP_client2 = skCliente2.getInetAddress().toString();
 	    				System.out.println("[" + TimeStamp + "] Conectado al cliente "
@@ -122,6 +125,10 @@ public class Server {
 	    				System.out.println("[" + TimeStamp + "] Conectado al cliente "
 	    						+ "IP:" + IP_client2);
 	    				
+	    				while(skCliente2.getInetAddress().toString() == "/127.0.0.1"){
+	    					skCliente2.close();
+	    					skCliente2 = skServidor2.accept();
+	    				}
 	    				//skCliente2 = skServidor2.accept();
 	    				/*IP_client2 = skCliente2.getInetAddress().toString();
 	    				System.out.println("[" + TimeStamp + "] Conectado al cliente "

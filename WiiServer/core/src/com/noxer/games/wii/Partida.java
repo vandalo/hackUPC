@@ -165,6 +165,7 @@ public class Partida implements Screen{
 				body.setActive(false);
 				bodiesToDestroy.removeValue(body, true);
 			}			
+			cam2.rotate((float) Math.toDegrees(-carFerran.angleGir), 0, 0, 1);
 			batch.setProjectionMatrix(cam.combined);
 			cam.update();
 	        Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
@@ -180,22 +181,24 @@ public class Partida implements Screen{
 	        modelBatch.render(carDani, environment);
 	        modelBatch.render(carFerran, environment);
 	        modelBatch.end();
-	        
-	      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);
-	        //cam.lookAt(carcito.getX()+carcito.getWidth()/2,carcito.getY()-10,0);
-	        
-	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
+
+	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
+	        cam.position.set(carDani.trans.x + carDani.bb.getWidth()*15/2,
+	        		carDani.trans.y-50, 
+	        		-50f);
 	        xVRP = (int) (carDani.trans.x + 20 * Math.cos(carDani.angleGir));
 	        yVRP = (int) (carDani.trans.y + 20 * Math.sin(carDani.angleGir));
-	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
+	        cam.lookAt(carDani.trans.x + carDani.bb.getWidth()*15/2,
+	        		carDani.trans.y+10, 
+	        		10);
 	        cam.near = 0.1f;
 	        cam.far = 800f;
-	        cam.rotate(-55, 1, 0, 0);
+	        //cam.rotate(-55, 1, 0, 0);
 	        cam.update();
 	        ////
 	        ///FINISH PANTALLA TOP
 		    ///////////
-	        cam2.rotate(-40, 0, 0, 1);
+	        cam2.rotate((float) Math.toDegrees(-carFerran.angleGir), 0, 0, 1);
 	        batch.setProjectionMatrix(cam2.combined);
 		    cam2.update();
 	        Gdx.gl.glViewport(0,0,
@@ -211,7 +214,7 @@ public class Partida implements Screen{
 	        modelBatch.render(carDani, environment);
 	        modelBatch.render(carFerran, environment);
 	        modelBatch.end();
-	        cam2.rotate(40, 0, 0, 1);
+	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
 	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
 	        		carFerran.trans.y-50, 
 	        		-50f);
