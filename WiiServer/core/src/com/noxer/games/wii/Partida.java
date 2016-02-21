@@ -71,7 +71,8 @@ public class Partida implements Screen{
     boolean firstTime;
 	private TextureAtlas atlas, gameUI;
 	protected Skin skin, skin2;
-	private int xVRP, yVRP;
+	private float xVRP, yVRP;
+	final private int radio = 20;
 	//xVRP = xObs + R * cos(angle);
     //zVRP = (zObs + R * sin(angle));
 	
@@ -120,7 +121,8 @@ public class Partida implements Screen{
 /////////////////////////////////////
 /////////////////////////////////////
         
-		cam = cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
+		cam = new PerspectiveCamera(60, 15, 15 * (h / w));
+		cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
 		//cam2 = new PerspectiveCamera(60, 15, 15 * (h / w));
 
         background = new Sprite(new Texture("fondo2.png"));
@@ -190,10 +192,10 @@ public class Partida implements Screen{
 	        cam.position.set(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40, -50f);
 	        xVRP = (int) (carDani.trans.x + 20 * Math.cos(carDani.angleGir));
 	        yVRP = (int) (carDani.trans.y + 20 * Math.sin(carDani.angleGir));
-	        cam.lookAt(xVRP,yVRP,0);
+	        cam.lookAt(carDani.trans.x+carDani.bb.getWidth()*15/2, carDani.trans.y-40,0);
 	        cam.near = 0.1f;
 	        cam.far = 3000f;
-	        cam.rotate(-50, 1, 0, 0);
+	        cam.rotate(-55, 1, 0, 0);
 	        cam.update();
 	        ////
 	        ///FINISH PANTALLA TOP
@@ -214,14 +216,36 @@ public class Partida implements Screen{
 	        modelBatch.render(carFerran, environment);
 	        modelBatch.end();
 	        
-	        cam2.position.set(carFerran.trans.x+ carFerran.bb.getWidth()*15/2, carFerran.trans.y-40, -50f);
-	        xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir));
-	        yVRP = (int) (carFerran.trans.y + 20 * Math.sin(carFerran.angleGir));
-	        cam2.lookAt(xVRP,yVRP,0);
+	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+	        		carFerran.trans.y-30, 
+	        		-50f);
+	        xVRP = (float) (cam2.position.x + 10*Math.cos(carFerran.angleGir - Math.PI/2));
+	        yVRP = (float) (cam2.position.y + 10*Math.sin(carFerran.angleGir - Math.PI/2));
+	        //xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
+	        //yVRP = (int) (carFerran.trans.y - 20 - 20 * Math.sin(carFerran.angleGir-Math.PI/2));
+	        cam2.lookAt(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+	        		carFerran.trans.y-40, 
+	        		0);
+	        
+	        /*cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+	        		carFerran.trans.y-30, 
+	        		-40f);
+	        xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
+	        yVRP = (int) (carFerran.trans.y - 20 - 20 * Math.sin(carFerran.angleGir-Math.PI/2));
+	        cam2.lookAt(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+	        		carFerran.trans.y-30,-30);*/
+	        /*System.out.println("RADIOS: " + carFerran.angleGir);
+	        cam2.position.set((float)(-Math.cos(carFerran.angleGir-Math.PI/2)*radio + carFerran.trans.x + carFerran.bb.getWidth()*15/2),
+	        		(float)(radio*-Math.sin(carFerran.angleGir-Math.PI/2) + carFerran.trans.y), 
+	        		-50f);
+	        xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
+	        yVRP = (int) (carFerran.trans.y - 20 - 20 * Math.sin(carFerran.angleGir-Math.PI/2));
+	        cam2.lookAt(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+	        		carFerran.trans.y,0);*/
 	        	        
 	        cam2.near = 0.1f;
 	        cam2.far = 3000f;
-	        cam2.rotate(-50, 1, 0, 0);
+	        cam2.rotate(-55, 1, 0, 0);
 	        cam2.update();
 	        
 	        
@@ -258,7 +282,7 @@ public class Partida implements Screen{
 	        //zVRP = (zObs + R * sin(angle));
 	        cam.near = 0.1f;
 	        cam.far = 3000f;
-	        cam.rotate(-50, 1, 0, 0);
+	        cam.rotate(-55, 1, 0, 0);
 	        cam.update();
 	        ////
 	        ///FINISH PANTALLA TOP
@@ -286,7 +310,7 @@ public class Partida implements Screen{
 	        	        
 	        cam2.near = 0.1f;
 	        cam2.far = 300f;
-	        cam2.rotate(-50, 1, 0, 0);
+	        cam2.rotate(-55, 1, 0, 0);
 	        cam2.update();
 	        
 	        if(firstTime){
