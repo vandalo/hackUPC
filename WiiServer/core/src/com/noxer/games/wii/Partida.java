@@ -218,7 +218,7 @@ public class Partida implements Screen{
 	        
 	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
 	        		carFerran.trans.y-50, 
-	        		-70f);
+	        		-50f);
 	        xVRP = (float) (cam2.position.x + 10*Math.cos(carFerran.angleGir - Math.PI/2));
 	        yVRP = (float) (cam2.position.y + 10*Math.sin(carFerran.angleGir - Math.PI/2));
 	        //xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
