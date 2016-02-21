@@ -74,10 +74,15 @@ public class Partida implements Screen{
 	protected Skin skin, skin2;
 	private float xVRP, yVRP;
 	final private int radio = 20;
+	Vector3 vec;
 	//xVRP = xObs + R * cos(angle);
     //zVRP = (zObs + R * sin(angle));
 	
 	public Partida(){
+		/*vec = new Vector3(carFerran.trans.x + carFerran.bb.getWidth()*15/2-carFerran.trans.x + carFerran.bb.getWidth()*15/2, 
+				carFerran.trans.y + carFerran.bb.getHeight()*15/2-carFerran.trans.y + carFerran.bb.getHeight()*15/2 - 50 ,
+				5);*/
+		vec = new Vector3();
 		firstTime = true;
 		start = false;
 		float w = Gdx.graphics.getWidth();
@@ -139,13 +144,13 @@ public class Partida implements Screen{
         //carFerran = new auxCar(this, model2, new Vector3(54*32/2f, 100+90*32/2f,0), 0);
         carDani = new auxCar(this, model, new Vector3(54*32, (499-89)*32,0), 0);
         carFerran = new auxCar(this, model2, new Vector3(56*32, (499-89)*32,0), 1);
-        carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
-		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
+        carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -80);
+		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -80);
 		carDani.initBody(world);
 		carFerran.initBody(world);
 		
 		modelBox = new ObjLoader().loadModel(Gdx.files.internal("Crate1.obj"));
-		boxes = new Box[3];
+		boxes = new Box[20];
 		boxes[0] = new Box(this, modelBox, new Vector3(57*32, (499-82)*32,0));
 		boxes[0].transform.scale(15, 15, 10);
 		boxes[0].initBody(world);
@@ -157,6 +162,97 @@ public class Partida implements Screen{
 		boxes[2] = new Box(this, modelBox, new Vector3(54*32, (499-82)*32,0));
 		boxes[2].transform.scale(15, 15, 10);
 		boxes[2].initBody(world);
+		
+		boxes[4] = new Box(this, modelBox, new Vector3(1787, 13182,0));
+		boxes[4].transform.scale(15, 15, 10);
+		boxes[4].initBody(world);
+
+
+		boxes[5] = new Box(this, modelBox, new Vector3(2541f,14381.07f,0f));
+		boxes[5].transform.scale(15, 15, 10);
+		boxes[5].initBody(world);
+
+
+		boxes[6] = new Box(this, modelBox, new Vector3(3699.228f, 14304.192f,0));
+		boxes[6].transform.scale(15, 15, 10);
+		boxes[6].initBody(world);
+
+
+		boxes[7] = new Box(this, modelBox, new Vector3(4897.1953f, 14288.212f,0));
+		boxes[7].transform.scale(15, 15, 10);
+		boxes[7].initBody(world);
+
+
+		boxes[8] = new Box(this, modelBox, new Vector3(5297.6426f, 13476.052f,0));
+		boxes[8].transform.scale(15, 15, 10);
+		boxes[8].initBody(world);
+
+
+		boxes[9] = new Box(this, modelBox, new Vector3(5939.092f, 12515.612f,0));
+		boxes[9].transform.scale(15, 15, 10);
+		boxes[9].initBody(world);
+
+
+		boxes[10] = new Box(this, modelBox, new Vector3(5888.771f, 11318.275f,0));
+		boxes[10].transform.scale(15, 15, 10);
+		boxes[10].initBody(world);
+
+
+		boxes[11] = new Box(this, modelBox, new Vector3(5923.629f, 10119.802f,0));
+		boxes[11].transform.scale(15, 15, 10);
+		boxes[11].initBody(world);
+
+		boxes[12] = new Box(this, modelBox, new Vector3(5896.0283f, 8921.152f,0));
+		boxes[12].transform.scale(15, 15, 10);
+		boxes[12].initBody(world);
+
+
+		boxes[13] = new Box(this, modelBox, new Vector3(5928.9873f, 7725.534f,0));
+		boxes[13].transform.scale(15, 15, 10);
+		boxes[13].initBody(world);
+
+
+		boxes[14] = new Box(this, modelBox, new Vector3(5242.9663f, 7327.282f,0));
+		boxes[14].transform.scale(15, 15, 10);
+		boxes[14].initBody(world);
+
+
+		boxes[15] = new Box(this, modelBox, new Vector3(5221.812f, 8494.491f,0));
+		boxes[15].transform.scale(15, 15, 10);
+		boxes[15].initBody(world);
+
+
+		boxes[16] = new Box(this, modelBox, new Vector3(4947.6924f, 9507.618f,0));
+		boxes[16].transform.scale(15, 15, 10);
+		boxes[16].initBody(world);
+
+
+		boxes[17] = new Box(this, modelBox, new Vector3(4066.1902f, 8939.8545f,0));
+		boxes[17].transform.scale(15, 15, 10);
+		boxes[17].initBody(world);
+
+
+
+
+
+		boxes[18] = new Box(this, modelBox, new Vector3(4241.8784f, 12573.542f,0));
+		boxes[18].transform.scale(15, 15, 10);
+		boxes[18].initBody(world);
+
+
+		boxes[19] = new Box(this, modelBox, new Vector3(3340.651f, 10693.012f,0));
+		boxes[19].transform.scale(15, 15, 10);
+		boxes[19].initBody(world);
+
+
+		boxes[3] = new Box(this, modelBox, new Vector3(1759.4908f, 10842.136f,0));
+		boxes[3].transform.scale(15, 15, 10);
+		boxes[3].initBody(world);
+		
+		vec.x = 0;
+		//vec.y = cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
+        		/*carFerran.trans.y + carFerran.bb.getHeight()*15/2 - 50, 
+        		-20f);*/
         /*carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
 		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
 		carDani.initBody(world);
@@ -186,7 +282,7 @@ public class Partida implements Screen{
 				body.setActive(false);
 				bodiesToDestroy.removeValue(body, true);
 			}			
-			cam2.rotate((float) Math.toDegrees(-carFerran.angleGir), 0, 0, 1);
+			cam.rotate((float) Math.toDegrees(-carDani.angleGir), 0, 0, 1);
 			batch.setProjectionMatrix(cam.combined);
 			cam.update();
 	        Gdx.gl.glViewport(0,Gdx.graphics.getHeight()/2,
@@ -207,7 +303,18 @@ public class Partida implements Screen{
 	        }
 	        modelBatch.end();
 
-	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
+	        xVRP = (float) (carDani.trans.x + carDani.bb.getWidth()*15/2 - 50*Math.cos(carDani.angleGir - Math.PI/2));
+	        yVRP = (float) (carDani.trans.y + carDani.bb.getHeight()*15/2 + 50*Math.sin(carDani.angleGir - Math.PI/2));
+	        cam.position.set(xVRP,
+	        		yVRP, 
+	        		-20f);
+	        cam.lookAt(carDani.trans.x + carDani.bb.getWidth()*15/2,
+	        		carDani.trans.y + carDani.bb.getHeight()*15/2, 
+	        		5f);
+	        cam.rotate((float) Math.toDegrees(carDani.angleGir), 0, 0, 1);
+	        
+	        
+	        /*cam.rotate((float) Math.toDegrees(carDani.angleGir), 0, 0, 1);
 	        cam.position.set(carDani.trans.x + carDani.bb.getWidth()*15/2,
 	        		carDani.trans.y-50, 
 	        		-50f);
@@ -215,7 +322,10 @@ public class Partida implements Screen{
 	        yVRP = (int) (carDani.trans.y + 20 * Math.sin(carDani.angleGir));
 	        cam.lookAt(carDani.trans.x + carDani.bb.getWidth()*15/2,
 	        		carDani.trans.y+10, 
-	        		10);
+	        		10);*/
+	        
+	        
+	        
 	        cam.near = 0.1f;
 	        cam.far = 800f;
 	        //cam.rotate(-55, 1, 0, 0);
@@ -234,6 +344,7 @@ public class Partida implements Screen{
 	        		3000,2000);
 	        tiledMapRenderer.render();
 		    batch.end();
+		    
 		    debugRenderer.render(world, cam2.combined); 
 		    modelBatch.begin(cam2);
 	        modelBatch.render(carDani, environment);
@@ -243,18 +354,20 @@ public class Partida implements Screen{
 	        	boxes[i].update(delta);
 	        }
 	        modelBatch.end();
-	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
-	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
-	        		carFerran.trans.y-50, 
-	        		-50f);
-	        xVRP = (float) (cam2.position.x + 10*Math.cos(carFerran.angleGir - Math.PI/2));
-	        yVRP = (float) (cam2.position.y + 10*Math.sin(carFerran.angleGir - Math.PI/2));
+		    
+	        xVRP = (float) (carFerran.trans.x + carFerran.bb.getWidth()*15/2 - 50*Math.cos(carFerran.angleGir - Math.PI/2));
+	        yVRP = (float) (carFerran.trans.y + carFerran.bb.getHeight()*15/2 + 50*Math.sin(carFerran.angleGir - Math.PI/2));
+	        cam2.position.set(xVRP,
+	        		yVRP, 
+	        		-20f);
 	        //xVRP = (int) (carFerran.trans.x + 20 * Math.cos(carFerran.angleGir-Math.PI/2));
 	        //yVRP = (int) (carFerran.trans.y - 20 - 20 * Math.sin(carFerran.angleGir-Math.PI/2));
 	        cam2.lookAt(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
-	        		carFerran.trans.y+10, 
-	        		10);
-	        	        
+	        		carFerran.trans.y + carFerran.bb.getHeight()*15/2, 
+	        		5f);
+	        //carFerran.trans.y + carFerran.bb.getHeight()*15/2, 	
+	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
+	        
 	        cam2.near = 0.1f;
 	        cam2.far = 800f;
 	        
