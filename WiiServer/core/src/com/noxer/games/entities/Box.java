@@ -31,6 +31,8 @@ public class Box extends ModelInstance {
 	private float velocidadX, velocidadY;
 	boolean firstUpdate;
 	public float angleGir;
+	public boolean pintar;
+	public float tiempo;
 	
 
 	
@@ -49,22 +51,18 @@ public class Box extends ModelInstance {
 
 		this.pos = pos;
 		angleGir = 0;
+		pintar = true;
+		tiempo = 0;
 		
 		
 	}
 	
-
-	private float velocitatTotal(){
-		return velocidadActual;//(float) Math.sqrt((velocidadX*velocidadX)+(velocidadY*velocidadY)+1);
-	}
 		
 	public void update(float deltaTime) {
-		if(firstUpdate){
-			//velocidadX = 0.1f;
-			firstUpdate = false;
-		}
-
-		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));		
+		
+		tiempo -= deltaTime;
+		if (tiempo <= 0) pintar = true;
+		transform.rotate(0,0,1,(float) Math.toDegrees(35*deltaTime));		
 	}
 	
 	
@@ -81,7 +79,7 @@ public class Box extends ModelInstance {
         PolygonShape shape = new PolygonShape();
         //CircleShape shape = new CircleShape();
         //shape.setRadius(getWidth()/2);
-        shape.setAsBox( bb.getWidth()*5/2, bb.getDepth()*5/2);
+        shape.setAsBox( bb.getWidth()*15/2, bb.getDepth()*15/2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

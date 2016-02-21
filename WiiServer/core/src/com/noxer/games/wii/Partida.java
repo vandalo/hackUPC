@@ -42,6 +42,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.noxer.games.entities.Box;
 import com.noxer.games.entities.Car;
 import com.noxer.games.entities.auxCar;
 
@@ -55,7 +56,7 @@ public class Partida implements Screen{
     TiledMapRenderer tiledMapRenderer;
     //private Sprite car;
     private ModelBatch modelBatch;
-    private Model model, model2;
+    private Model model, model2, modelBox;
     public ModelInstance instance;
     public Environment environment;
     public World world;
@@ -63,6 +64,7 @@ public class Partida implements Screen{
     Box2DDebugRenderer debugRenderer;
     Car carcito, carcitoFerran;
     auxCar carDani, carFerran;
+    Box boxes[];
     private float timeToStart;  
     private float lookX, lookY;
     Stage semafor;
@@ -93,6 +95,7 @@ public class Partida implements Screen{
 		skin = new Skin(Gdx.files.internal("skins/userInterface.json"), atlas);
 		
 		semafor = new Stage(new StretchViewport(800, 480));
+		world.setContactListener(new ContListener(this));
 		
         
 		
@@ -134,12 +137,30 @@ public class Partida implements Screen{
         //instance = new ModelInstance(model2, new Vector3(20*32/2f, 150,0));
         //carDani = new auxCar(this, model, new Vector3(52*32/2f, 100+90*32/2f,0), 0);
         //carFerran = new auxCar(this, model2, new Vector3(54*32/2f, 100+90*32/2f,0), 0);
-        carDani = new auxCar(this, model, new Vector3(108*32/2, (499-89)*32,0), 0);
-        carFerran = new auxCar(this, model2, new Vector3(111*32/2, (499-89)*32,0), 1);
+        carDani = new auxCar(this, model, new Vector3(54*32, (499-89)*32,0), 0);
+        carFerran = new auxCar(this, model2, new Vector3(56*32, (499-89)*32,0), 1);
         carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
 		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
 		carDani.initBody(world);
 		carFerran.initBody(world);
+		
+		modelBox = new ObjLoader().loadModel(Gdx.files.internal("Crate1.obj"));
+		boxes = new Box[3];
+		boxes[0] = new Box(this, modelBox, new Vector3(57*32, (499-82)*32,0));
+		boxes[0].transform.scale(15, 15, 10);
+		boxes[0].initBody(world);
+		
+		boxes[1] = new Box(this, modelBox, new Vector3(111*32/2, (499-82)*32,0));
+		boxes[1].transform.scale(15, 15, 10);
+		boxes[1].initBody(world);
+		
+		boxes[2] = new Box(this, modelBox, new Vector3(54*32, (499-82)*32,0));
+		boxes[2].transform.scale(15, 15, 10);
+		boxes[2].initBody(world);
+        /*carDani.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
+		carFerran.transform.scale(15, 15, 15).rotate(1, 0, 0, -70);
+		carDani.initBody(world);
+		carFerran.initBody(world);*/
 		
 		//instance.transform.scale(20, 20, 20).rotate(1, 0, 0, -90);
 	}
@@ -180,6 +201,10 @@ public class Partida implements Screen{
 		    modelBatch.begin(cam);
 	        modelBatch.render(carDani, environment);
 	        modelBatch.render(carFerran, environment);
+	        for (int i = 0; i < boxes.length; i++){
+	        	if (boxes[i].pintar)modelBatch.render(boxes[i], environment);
+	        	boxes[i].update(delta);
+	        }
 	        modelBatch.end();
 
 	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
@@ -213,6 +238,10 @@ public class Partida implements Screen{
 		    modelBatch.begin(cam2);
 	        modelBatch.render(carDani, environment);
 	        modelBatch.render(carFerran, environment);
+	        for (int i = 0; i < boxes.length; i++){
+	        	if (boxes[i].pintar)modelBatch.render(boxes[i], environment);
+	        	boxes[i].update(delta);
+	        }
 	        modelBatch.end();
 	        cam2.rotate((float) Math.toDegrees(carFerran.angleGir), 0, 0, 1);
 	        cam2.position.set(carFerran.trans.x + carFerran.bb.getWidth()*15/2,
@@ -254,6 +283,10 @@ public class Partida implements Screen{
 		    modelBatch.begin(cam);
 	        modelBatch.render(carDani, environment);
 	        modelBatch.render(carFerran, environment);
+	        for (int i = 0; i < boxes.length; i++){
+	        	if (boxes[i].pintar)modelBatch.render(boxes[i], environment);
+	        	boxes[i].update(delta);
+	        }
 	        modelBatch.end();
 	        
 	      //cam.position.set(carcito.getX()+carcito.getWidth()/2, carcito.getY()-10, -50f);

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="500" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="blanc" tilewidth="32" tileheight="32">
+  <image source="blanco.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="258" name="negre" tilewidth="32" tileheight="32">
+  <image source="negre.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="259" name="asflat-01" tilewidth="32" tileheight="32">
+  <image source="asflat-01.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="260" name="daigonalX-01" tilewidth="32" tileheight="32">
+  <image source="8ASEF-01.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="261" name="patrones" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="daigonal-01.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="daigonal2-01.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="daigonalX-01-01.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="daigonal-01.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="diagonal3-01.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="diagonal-0234-01.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="diagonal-335-01.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="diagonal-asdfassdff-01.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="lateral.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="lateral-01.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="lateral02-01.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="lateral-02-01.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="NEWNEWNENW-01.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="NEWNEWNENW-01.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="NEWWW-01.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="NQWENWQENQ4224234-01.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="NQWENWQENQ4224234-01.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="NEWNEWNENW-01.png"/>
+  </tile>
+  <tile id="18">
+   <image width="32" height="32" source="NEWWW-01.png"/>
+  </tile>
+  <tile id="19">
+   <image width="32" height="32" source="asflat-01.png"/>
+  </tile>
+  <tile id="20">
+   <image width="32" height="32" source="newnewnewwithe-01.png"/>
+  </tile>
+  <tile id="21">
+   <image width="32" height="32" source="newnewnewwithe-01.png"/>
+  </tile>
+  <tile id="22">
+   <image width="32" height="32" source="newwhite-01.png"/>
+  </tile>
+  <tile id="23">
+   <image width="32" height="32" source="newwithealone-01-01.png"/>
+  </tile>
+  <tile id="24">
+   <image width="32" height="32" source="blanco.png"/>
+  </tile>
+  <tile id="25">
+   <image width="32" height="32" source="rojo.png"/>
+  </tile>
+  <tile id="26">
+   <image width="32" height="32" source="8ASEF-01.png"/>
+  </tile>
+  <tile id="27">
+   <image width="32" height="32" source="ASFSAFASD-01.png"/>
+  </tile>
+  <tile id="28">
+   <image width="32" height="32" source="Sin título-8-01.png"/>
+  </tile>
+  <tile id="29">
+   <image width="32" height="32" source="WDRGSDRG-01.png"/>
+  </tile>
+  <tile id="30">
+   <image width="32" height="32" source="WDRGSDRG-01.png"/>
+  </tile>
+  <tile id="31">
+   <image width="32" height="32" source="diagonal-0234-01.png"/>
+  </tile>
+  <tile id="32">
+   <image width="32" height="32" source="diagonal-asdfassdff-01.png"/>
+  </tile>
+  <tile id="33">
+   <image width="32" height="32" source="Sin título-8-01.png"/>
+  </tile>
+  <tile id="34">
+   <image width="32" height="32" source="lateral.png"/>
+  </tile>
+  <tile id="35">
+   <image width="32" height="32" source="diagonal-01.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="297" name="NEW-01" tilewidth="32" tileheight="32">
+  <image source="diagonal-01.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="298" name="JUNTURAS" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="dfgdfg-01-01.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="dfsdf-01.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="erdgdrg-01.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="ergerwtwre-01.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="dfsdf-01.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="sdfsefsdf-01-01.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="Sin título-7-01.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="werrewrr-01.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="EFFF-01.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="ASDFASEFD-01.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="DGSDFFSD-01.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="WRGEWREWRT-01.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="310" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" trans="ff00ff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="566" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" trans="ff00ff" width="512" height="512"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="500" height="500">
+  <data encoding="base64" compression="zlib">
+   eJztzjERAAAIBKDPakQTWkM9BnY6SQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwSi04AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDDAMczK5o=
+  </data>
+ </layer>
+ <layer name="objectes decorat" width="500" height="500">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+</map>
