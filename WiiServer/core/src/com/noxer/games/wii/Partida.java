@@ -176,8 +176,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
 	        batch.begin();
 	
-	        tiledMapRenderer.setView(cam.combined, -10000, -10000,
-	        		30000,30000);
+	        tiledMapRenderer.setView(cam.combined, cam.position.x-500, cam.position.y-500,
+	        		1000,1000);
 	        tiledMapRenderer.render();
 	        batch.end();	    
 		    
@@ -206,8 +206,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 		    batch.begin();
 		    /*bottom Half*/     
-		    tiledMapRenderer.setView(cam2.combined, -5000, -5000,
-	        		20000,20000);
+		    tiledMapRenderer.setView(cam2.combined, cam2.position.x-500, cam2.position.y-500,
+	        		1000,1000);
 	        tiledMapRenderer.render();
 		    batch.end();
 		    debugRenderer.render(world, cam2.combined); 
@@ -261,8 +261,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);      
 	        batch.begin();
 	
-	        tiledMapRenderer.setView(cam.combined, cam.position.x-500, cam.position.y-500,
-	        		500,500);
+	        tiledMapRenderer.setView(cam.combined, cam2.position.x-500, cam2.position.y-500,
+	        		1000,1000);
 	        tiledMapRenderer.render();
 	        batch.end();	    
 		    
@@ -293,8 +293,8 @@ public class Partida implements Screen{
 	        		Gdx.graphics.getWidth(),Gdx.graphics.getHeight()/2);    
 		    batch.begin();
 		    /*bottom Half*/     
-		    tiledMapRenderer.setView(cam2.combined, cam.position.x-800, cam.position.y-500,
-	        		500,500);
+		    tiledMapRenderer.setView(cam2.combined, cam2.position.x-500, cam2.position.y-500,
+	        		1000,1000);
 	        tiledMapRenderer.render();
 		    batch.end();
 		    debugRenderer.render(world, cam2.combined); 

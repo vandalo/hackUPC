@@ -23,7 +23,7 @@ public class auxCar extends ModelInstance {
 	private float velocidadActual;
 	private float turbo;
 	public Body body;
-	public static int VEL_MAX = 100;
+	public static int VEL_MAX = 200;
 	final short COCHE = 0x1;
 	private float factorDeGiro;
 	public BoundingBox bb;
@@ -75,7 +75,7 @@ public class auxCar extends ModelInstance {
 		angleGir += (gir*deltaTime);
 		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));
 		velocidadY = (float) (Math.cos(angleGir)*velTotal);
-		velocidadX = (float) (Math.sin(angleGir)*velTotal);
+		velocidadX = (float) (Math.sin(angleGir)*velTotal*2);
 
 		
 		if(freno){

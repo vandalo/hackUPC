@@ -23,7 +23,7 @@ public class Box extends ModelInstance {
 	private float velocidadActual;
 	private float turbo;
 	public Body body;
-	public static int VEL_MAX = 100;
+	public static int VEL_MAX = 200;
 	final short COCHE = 0x1;
 	private float factorDeGiro;
 	public BoundingBox bb;
