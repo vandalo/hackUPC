@@ -1,0 +1,306 @@
+
+tiles.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+8ASEF-01
+  rotate: false
+  xy: 0, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ASDFASEFD-01
+  rotate: false
+  xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+asflat-01
+  rotate: false
+  xy: 32, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ASFSAFASD-01
+  rotate: false
+  xy: 32, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+blanco
+  rotate: false
+  xy: 64, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+daigonal-01
+  rotate: false
+  xy: 64, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+daigonal2-01
+  rotate: false
+  xy: 96, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+daigonalX-01-01
+  rotate: false
+  xy: 96, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+daigonalX-01
+  rotate: false
+  xy: 96, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+dfgdfg-01-01
+  rotate: false
+  xy: 128, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+dfsdf-01
+  rotate: false
+  xy: 128, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+DGSDFFSD-01
+  rotate: false
+  xy: 160, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+diagonal-01
+  rotate: false
+  xy: 160, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+diagonal-0234-01
+  rotate: false
+  xy: 192, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+diagonal-335-01
+  rotate: false
+  xy: 192, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+diagonal-asdfassdff-01
+  rotate: false
+  xy: 224, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+diagonal3-01
+  rotate: false
+  xy: 224, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+EFFF-01
+  rotate: false
+  xy: 256, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+erdgdrg-01
+  rotate: false
+  xy: 256, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ergerwtwre-01
+  rotate: false
+  xy: 256, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lateral-01
+  rotate: false
+  xy: 288, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lateral-02-01
+  rotate: false
+  xy: 288, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lateral
+  rotate: false
+  xy: 320, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lateral02-01
+  rotate: false
+  xy: 320, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+negre
+  rotate: false
+  xy: 352, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NEW-01
+  rotate: false
+  xy: 352, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NEWNEWN-01
+  rotate: false
+  xy: 384, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NEWNEWNENW-01
+  rotate: false
+  xy: 384, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+newnewnewwithe-01
+  rotate: false
+  xy: 384, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+newnewwithe-01
+  rotate: false
+  xy: 416, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NEWW-01
+  rotate: false
+  xy: 416, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NEWWW-01
+  rotate: false
+  xy: 416, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+newwhite-01
+  rotate: false
+  xy: 448, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+newwithealone-01-01
+  rotate: false
+  xy: 448, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+NQWENWQENQ4224234-01
+  rotate: false
+  xy: 480, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+rojo
+  rotate: false
+  xy: 480, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+sdfsdf-01
+  rotate: false
+  xy: 512, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+sdfsefsdf-01-01
+  rotate: false
+  xy: 512, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Sin título-7-01
+  rotate: false
+  xy: 544, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Sin título-8-01
+  rotate: false
+  xy: 544, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+WDRGSDRG-01
+  rotate: false
+  xy: 576, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+werrewrr-01
+  rotate: false
+  xy: 576, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+WRGEWREWRT-01
+  rotate: false
+  xy: 608, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

@@ -84,7 +84,7 @@ public class auxCar extends ModelInstance {
 		}
 
 		body.setLinearVelocity(velocidadX, velocidadY);
-		body.setAngularVelocity(0.1f);
+		//body.setAngularVelocity(0.1f);
 		/*if (body.getAngle() >= 60){
 			body.setTransform(body.getPosition().x, body.getPosition().y, 60);
 		}
