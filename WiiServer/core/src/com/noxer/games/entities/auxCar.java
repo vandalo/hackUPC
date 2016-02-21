@@ -75,7 +75,7 @@ public class auxCar extends ModelInstance {
 		angleGir += (gir*deltaTime);
 		transform.rotate(0,1,0,(float) Math.toDegrees(gir*deltaTime));
 		velocidadY = (float) (Math.cos(angleGir)*velTotal);
-		velocidadX = (float) (Math.sin(angleGir)*velTotal*2);
+		velocidadX = (float) (Math.sin(angleGir)*velTotal);
 
 		
 		if(freno){

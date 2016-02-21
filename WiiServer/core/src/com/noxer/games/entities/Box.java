@@ -62,7 +62,7 @@ public class Box extends ModelInstance {
 		
 		tiempo -= deltaTime;
 		if (tiempo <= 0) pintar = true;
-		transform.rotate(0,0,1,(float) Math.toDegrees(35*deltaTime));		
+		transform.rotate(0,0,1,(float) Math.toDegrees(1.6*deltaTime));		
 	}
 	
 	

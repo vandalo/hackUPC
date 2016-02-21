@@ -83,7 +83,7 @@ public class Partida implements Screen{
 		float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         batch = new SpriteBatch();
-        tiledMap = new TmxMapLoader().load("GREATMAP.tmx");
+        tiledMap = new TmxMapLoader().load("TILES/mapadefinitiu.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         //skin = new Skin(gameUI);
         world = new World(new Vector2(0, 0),true);
